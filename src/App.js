@@ -2,6 +2,8 @@
 import './App.css';
 import CustomButton from './components/CustomButton';
 import NavBar from './components/NavBar';
+import {Route, Routes } from 'react-router-dom'
+import Home from './pages/Home';
 
 /**
  * Custom button component that supports the following variants from Bootstrap:
@@ -16,7 +18,9 @@ function App() {
   return (
     <div className="App">
       <NavBar/>
-        
+      <Routes>
+        <Route exact path='/' element={<Home />} />
+      </Routes>
     </div>
   );
 }
