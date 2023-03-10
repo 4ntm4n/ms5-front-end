@@ -1,10 +1,10 @@
 import React from 'react'
 import { Button } from 'react-bootstrap'
 
-function CustomButton({variant='primary', text}) {
+function CustomButton({variant='primary', text, className='btn'}) {
   return (
     <>
-        <Button variant={variant}>
+        <Button className={className} variant={variant}>
             {text}
         </Button>
     </>

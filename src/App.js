@@ -16,8 +16,8 @@ function App() {
   return (
     <div className="App">
         <Header />
-        <CustomButton variant={'warning'} text={'warning button'} />
-        <CustomButton variant={'large'} text={'large button'} />
+        <CustomButton variant={'light'} text={'warning button'} className={"btn btn-outline-primary"}/>
+        <CustomButton variant={'dark'} text={'dark button'} />
         
     </div>
   );
