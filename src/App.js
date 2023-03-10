@@ -1,7 +1,7 @@
 // replace this logo laterz. import logo from './logo.svg';
 import './App.css';
 import CustomButton from './components/CustomButton';
-import Header from './components/Header';
+import NavBar from './components/NavBar';
 
 /**
  * Custom button component that supports the following variants from Bootstrap:
@@ -15,9 +15,7 @@ import Header from './components/Header';
 function App() {
   return (
     <div className="App">
-        <Header />
-        <CustomButton variant={'light'} text={'warning button'} className={"btn btn-outline-primary"}/>
-        <CustomButton variant={'dark'} text={'dark button'} />
+      <NavBar/>
         
     </div>
   );
