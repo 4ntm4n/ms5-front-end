@@ -1,6 +1,7 @@
 // replace this logo laterz. import logo from './logo.svg';
+import React from 'react';
 import './App.css';
-import CustomButton from './components/CustomButton';
+//import CustomButton from './components/CustomButton';
 import NavBar from './components/NavBar';
 import { Route, Routes } from 'react-router-dom'
 import FeedPage from './pages/FeedPage';
