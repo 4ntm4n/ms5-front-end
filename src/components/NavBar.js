@@ -1,31 +1,29 @@
 import React, { useState } from 'react'
 
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
+import { Link, NavLink } from 'react-router-dom';
+import { Container, Nav, Navbar, Offcanvas } from 'react-bootstrap';
 // import NavDropdown from 'react-bootstrap/NavDropdown';
-import Offcanvas from 'react-bootstrap/Offcanvas';
 
 function NavBar() {
-    const [loggedIn, setLoggedIn] = useState(false);
+    const [loggedIn, setLoggedIn] = useState(true);
 
-    
+
     // navigation links shown if loggedIn
     const authNav = (
         <>
-            <Nav.Link href="/feed">Feed</Nav.Link>
-            <Nav.Link href="/groups">Groups</Nav.Link>
-            <Nav.Link href="/tasks">Tasks</Nav.Link>
-            <Nav.Link href="/profile">Profile</Nav.Link>
-            <Nav.Link href="#setThisAction!">Logout</Nav.Link>
+            <NavLink className="nav-link" to="/feed">Feed</NavLink>
+            <NavLink className="nav-link" to="/groups">Groups</NavLink>
+            <NavLink className="nav-link" to="/tasks">Tasks</NavLink>
+            <NavLink className="nav-link" to="/profile">Profile</NavLink>
+            <NavLink className="nav-link" to="#setThisAction!">Logout</NavLink>
         </>
     )
 
     // navigation links shown if !loggedIn
     const unAuthNav = (
         <>
-            <Nav.Link href="/login">Log in</Nav.Link>
-            <Nav.Link href="/signup">Sign Up</Nav.Link>
+            <NavLink className="nav-link" to="/login">Log in</NavLink>
+            <NavLink className="nav-link" to="/signup">Sign Up</NavLink>
         </>
     )
 
@@ -34,7 +32,7 @@ function NavBar() {
         <>
             <Navbar bg="light" expand="lg" className="mb-3">
                 <Container fluid>
-                    <Navbar.Brand href="#">GroupTask</Navbar.Brand>
+                    <Navbar.Brand as={Link} to="/">GroupTask</Navbar.Brand>
                     <Navbar.Toggle aria-controls={`offcanvasNavbar`} />
                     <Navbar.Offcanvas
                         id={`offcanvasNavbar`}
