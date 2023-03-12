@@ -1,5 +1,5 @@
-import React, { createContext, useContext, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { createContext, useContext, useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { axiosRes } from '../api/axiosDefaults';
 
 
@@ -24,7 +24,7 @@ export const useSetCurrentUser = () => useContext(SetCurrentUserContext);
 
 export const CurrentUserProvider = ({ children }) => {
     const [currentUser, setCurrentUser] = useState(null)
-    const history = useHistory();
+    const navigate = useNavigate();
 
     //function that tries to fetch user data from the database.
     const handleMount = async () => {
