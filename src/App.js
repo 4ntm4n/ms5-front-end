@@ -2,24 +2,31 @@
 import './App.css';
 import CustomButton from './components/CustomButton';
 import NavBar from './components/NavBar';
-import {Route, Routes } from 'react-router-dom'
-import Home from './pages/Home';
+import { Route, Routes } from 'react-router-dom'
+import FeedPage from './pages/FeedPage';
+import HomePage from './pages/HomePage';
+import GroupsPage from './pages/GroupsPage';
+import TasksPage from './pages/TasksPage';
+import LoginPage from './pages/auth_pages/LoginPage';
+import SignupPage from './pages/auth_pages/SignupPage';
 
-/**
- * Custom button component that supports the following variants from Bootstrap:
- * primary, secondary, success, danger, warning, info, light, dark, link
- *
- * Props:
- * - variant: string (one of the supported Bootstrap variants)
- * - text: string (the text to display on the button)
- */
+
 
 function App() {
   return (
     <div className="App">
-      <NavBar/>
+      <NavBar />
+
       <Routes>
-        <Route path='/' element={<Home />} />
+        {/* these paths will be public */}
+        <Route path='/' element={<HomePage />} />
+        <Route path='/login' element={<LoginPage />} />
+        <Route path='/signup' element={<SignupPage />} />
+
+        {/* these paths needs to be protected paths, "if auth." */}
+        <Route path='/feed' element={<FeedPage />} />
+        <Route path='/groups' element={<GroupsPage />} />
+        <Route path='/tasks' element={<TasksPage />} />
       </Routes>
     </div>
   );

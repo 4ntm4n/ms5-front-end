@@ -7,25 +7,25 @@ import Navbar from 'react-bootstrap/Navbar';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 
 function NavBar() {
-    const [loggedIn, setLoggedIn] = useState(true);
+    const [loggedIn, setLoggedIn] = useState(false);
 
     
     // navigation links shown if loggedIn
     const authNav = (
         <>
-            <Nav.Link href="#action1">Feed</Nav.Link>
-            <Nav.Link href="#action2">Groups</Nav.Link>
-            <Nav.Link href="#action2">Tasks</Nav.Link>
-            <Nav.Link href="#action2">Profile</Nav.Link>
-            <Nav.Link href="#action2">Logout</Nav.Link>
+            <Nav.Link href="/feed">Feed</Nav.Link>
+            <Nav.Link href="/groups">Groups</Nav.Link>
+            <Nav.Link href="/tasks">Tasks</Nav.Link>
+            <Nav.Link href="/profile">Profile</Nav.Link>
+            <Nav.Link href="#setThisAction!">Logout</Nav.Link>
         </>
     )
 
     // navigation links shown if !loggedIn
     const unAuthNav = (
         <>
-            <Nav.Link href="#action2">Log in</Nav.Link>
-            <Nav.Link href="#action2">Sign Up</Nav.Link>
+            <Nav.Link href="/login">Log in</Nav.Link>
+            <Nav.Link href="/signup">Sign Up</Nav.Link>
         </>
     )
 
