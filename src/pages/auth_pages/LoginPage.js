@@ -10,12 +10,16 @@ function LoginPage() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        const username = usernameRef.current.value;
-        const password = passwordRef.current.value;
-        
-        const loginPayLoad = {username, password}
+        /* const username = usernameRef.current.value;
+        const password = passwordRef.current.value; */
+
+        const loginPayLoad = {username: usernameRef.current.value, password: passwordRef.current.value}
+        try {
         const { data } = await axiosRes.post('/dj-rest-auth/login/', loginPayLoad)
         console.log(data)
+        } catch (error) {
+          console.log(error)
+        }
     }
 
     return (
