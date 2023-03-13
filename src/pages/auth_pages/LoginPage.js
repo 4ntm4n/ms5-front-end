@@ -1,16 +1,21 @@
 import React, { useRef } from 'react'
 import { Form, Button } from 'react-bootstrap'
+import { axiosRes } from '../../api/AxiosDefaults'
+import axios from 'axios'
 
 
 function LoginPage() {
     const usernameRef = useRef(null)
     const passwordRef = useRef(null)
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
         const username = usernameRef.current.value;
         const password = passwordRef.current.value;
-            console.log({ username, password });
+        
+        const loginPayLoad = {username, password}
+        const { data } = await axiosRes.post('/dj-rest-auth/login/', loginPayLoad)
+        console.log(data)
     }
 
     return (

@@ -10,14 +10,13 @@ import GroupsPage from './pages/GroupsPage';
 import TasksPage from './pages/TasksPage';
 import LoginPage from './pages/auth_pages/LoginPage';
 import SignupPage from './pages/auth_pages/SignupPage';
-import { CurrentUserProvider } from './contexts/CurrentUserContext';
+
 
 
 
 function App() {
   return (
-    <div className="App">
-      <CurrentUserProvider>
+      <div className="App">
         <NavBar />
 
         <Routes>
@@ -27,12 +26,13 @@ function App() {
           <Route path='/signup' element={<SignupPage />} />
 
           {/* these paths needs to be protected paths, "if auth." */}
+
           <Route path='/feed' element={<FeedPage />} />
           <Route path='/groups' element={<GroupsPage />} />
           <Route path='/tasks' element={<TasksPage />} />
+
         </Routes>
-      </CurrentUserProvider>
-    </div>
+      </div>
   );
 }
 
