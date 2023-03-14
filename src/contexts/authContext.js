@@ -17,8 +17,8 @@ function AuthProvider({ children }) {
     * then it sets the sets the 'isAuthenticated' value to true.
     */
 
-    const login = async (token) => {
-        localStorage.setItem('token', token)
+    const login = async (loginPayload) => {
+        localStorage.setItem('access_token', )
         setIsAuthenticated(true)
 
         try {
