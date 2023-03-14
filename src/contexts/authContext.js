@@ -17,19 +17,8 @@ function AuthProvider({ children }) {
     * then it sets the sets the 'isAuthenticated' value to true.
     */
 
-    const login = async (loginPayload) => {
-        localStorage.setItem('access_token', )
-        setIsAuthenticated(true)
-
-        try {
-            const { data } = await axiosAuth.get('dj-rest-auth/user/')
-            setUser(data)
-        } catch (error) {
-            console.log(error)
-        }
-    }
-
     // on logout the authProvider can be set to false. 
+    
     const logout = () => {
         localStorage.removeItem('token')
         setIsAuthenticated(false)
