@@ -1,7 +1,7 @@
 import React, { useContext, useRef, useEffect } from 'react'
 import { Form, Button } from 'react-bootstrap'
 import { axiosReq } from '../../api/AxiosDefaults'
-import { AuthContext } from '../../contexts/authContext'
+import { AuthContext } from '../../contexts/currentUserContext'
 
 
 function LoginPage() {
