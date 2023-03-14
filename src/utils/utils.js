@@ -6,11 +6,23 @@ import jwtDecode from "jwt-decode";
  * created by simpleJWT on the API. it is coming from the login response payload
  * returned from dj-rest-auth/login
  * 
- * This timestamp can be used to see if the token needs to be refreshed,
- * and then send a token refresh request if it is needed.
+ * This timestamp is saved in local storage can be used 
+ * to see if the token needs to be refreshed based on exp.date,
+ * so we can send a token refresh request if it is needed.
 */
 export const setTokenTimestamp = (data) => {
   const refreshTokenTimestamp = jwtDecode(data?.refresh_token).exp;
   localStorage.setItem("refreshTokenTimestamp", refreshTokenTimestamp);
 };
 
+
+// returns true or false based on if refreshTokenTimestamp exists
+// in localStorage or not.
+export const shouldRefreshToken = () => {
+    return !!localStorage.getItem("refreshTokenTimestamp");
+  };
+  
+  //function that removes the timestamp from localStorage
+  export const removeTokenTimestamp = () => {
+    localStorage.removeItem("refreshTokenTimestamp");
+  };
