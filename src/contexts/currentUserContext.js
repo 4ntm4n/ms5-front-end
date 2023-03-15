@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useEffect, useMemo, useState } from "react";
 import axios from "axios";
 import { axiosReq, axiosRes } from "../api/AxiosDefaults";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { removeTokenTimestamp, shouldRefreshToken } from "../utils/utils";
 
 export const CurrentUserContext = createContext();
@@ -11,9 +11,9 @@ export const useCurrentUser = () => useContext(CurrentUserContext);
 export const useSetCurrentUser = () => useContext(SetCurrentUserContext);
 
 
-export const currentUserContext = ({ children }) => {
+export const CurrentUserProvider = ({ children }) => {
     const [currentUser, setCurrentUser] = useState(null)
-    const navigate = Navigate() //instead of history in router-dom v6
+    const navigate = useNavigate() //instead of history in router-dom v6
 
 
     // set currentUser state to object returned from dj-rest-auth user.
@@ -32,7 +32,7 @@ export const currentUserContext = ({ children }) => {
 
     const handleLogin = async (loginPayLoad) => {
         try {
-          const { data } = await axios.post('/dj-rest-auth/login/', loginPayload)
+          const { data } = await axiosReq.post('/dj-rest-auth/login/', loginPayLoad)
         } catch (error) {
             console.log(error)
         }
@@ -81,11 +81,11 @@ export const currentUserContext = ({ children }) => {
                 return Promise.reject(error);
             }
         );
-    }, [history]);
+    }, [navigate]);
 
     return (
-        <CurrentUserContext.Provider>
-            <SetCurrentUserContext.Provider>
+        <CurrentUserContext.Provider value={currentUser}>
+            <SetCurrentUserContext.Provider value={{handleLogin, setCurrentUser}}>
                 {children}
             </SetCurrentUserContext.Provider>
         </CurrentUserContext.Provider>

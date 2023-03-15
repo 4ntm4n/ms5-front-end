@@ -1,12 +1,12 @@
-import React, { useContext, useRef, useEffect } from 'react'
+import React, {useRef, useEffect } from 'react'
 import { Form, Button } from 'react-bootstrap'
-import { axiosReq } from '../../api/AxiosDefaults'
-
+import { useSetCurrentUser } from '../../contexts/currentUserContext'
 
 
 function LoginPage() {
   const usernameRef = useRef(null)
   const passwordRef = useRef(null)
+  const { handleLogin } = useSetCurrentUser();
 
   useEffect(() => {
     console.log()
@@ -17,18 +17,15 @@ function LoginPage() {
     /* const username = usernameRef.current.value;
     const password = passwordRef.current.value; */
 
-    const loginPayLoad = { username: usernameRef.current.value, password: passwordRef.current.value }
+    const loginPayLoad = { 
+
+      username: usernameRef.current.value, 
+      password: passwordRef.current.value 
+    }
+
     try {
-      const { data } = await axiosReq.post('/dj-rest-auth/login/', loginPayLoad)
-      console.log("user :", data.user)
-      console.log("access :", data.access_token)
-      console.log("refresh token :", data.refresh_token)
-      // Request to refresh token
-    /*  
-
-      const refreshRes = await axiosReq.post('/dj-rest-auth/token/refresh/', refreshPayLoad)
-      console.log("new token :", refreshRes.data.access) */
-
+      handleLogin(loginPayLoad)
+      
     } catch (error) {
       console.log(error)
     }
