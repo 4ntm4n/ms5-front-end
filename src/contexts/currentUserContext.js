@@ -30,6 +30,14 @@ export const currentUserContext = ({ children }) => {
         handleMount();
     }, []);
 
+    const handleLogin = async (loginPayLoad) => {
+        try {
+          const { data } = await axios.post('/dj-rest-auth/login/', loginPayload)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     useMemo(() => {
         axiosReq.interceptors.request.use(
             async (config) => {
