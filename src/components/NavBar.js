@@ -1,13 +1,13 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 import { Link, NavLink } from 'react-router-dom';
 import { Container, Nav, Navbar, Offcanvas } from 'react-bootstrap';
+import { useCurrentUser  } from '../contexts/currentUserContext';
 // import NavDropdown from 'react-bootstrap/NavDropdown';
 
 function NavBar() {
-    const [loggedIn, setLoggedIn] = useState(true);
-
-
+   const currentUser = useCurrentUser();
+   
     // navigation links shown if loggedIn
     const authNav = (
         <>
@@ -26,7 +26,6 @@ function NavBar() {
             <NavLink className="nav-link" to="/signup">Sign Up</NavLink>
         </>
     )
-
 
     return (
         <>
@@ -47,7 +46,7 @@ function NavBar() {
                         <Offcanvas.Body>
                             <Nav className="justify-content-end flex-grow-1 pe-3">
 
-                                {loggedIn ? authNav : unAuthNav}
+                                {currentUser? authNav : unAuthNav}
 
                                 {/* <NavDropdown
                                     title="Dropdown"
