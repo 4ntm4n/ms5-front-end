@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { Card } from 'react-bootstrap'
 // import { useCurrentUser } from '../contexts/currentUserContext'
 import { axiosReq } from '../api/AxiosDefaults';
+import ProfilePic from './ProfilePic';
+
 function GroupComponent() {
     /* const currentUser = useCurrentUser(); */
     const [groups, setGroups] = useState([]);
@@ -33,18 +35,21 @@ function GroupComponent() {
                             </Card.Text>
                         </Card.Body>
                         <div>
+                            {/* map through the members and extract non group owners */}
                             <p>members</p>
                             {group.members.map((member) =>
                                 !member.is_owner && (
-                                    <h2 style={{ color: 'red' }}>{member.owner}</h2>
+                                    <ProfilePic member={member} size={50} />
                                 )
                             )}
                         </div>
                         <div>
                             <p>group owner</p>
+                            {/* map through the members and extract the group owner */}
                             {group.members.map((member) =>
                                 member.is_owner && (
-                                    <h2 style={{ color: 'red' }}>{member.owner}</h2>
+                                    <ProfilePic member={member} size={70} />
+
                                 )
                             )}
                         </div>
