@@ -76,3 +76,6 @@ https://www.youtube.com/watch?v=Ul3y1LXxzdU
 
 hooks:
 https://courses.webdevsimplified.com/react-hooks-simplified
+
+uuid:
+https://www.npmjs.com/package/uuid

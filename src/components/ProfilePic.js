@@ -1,7 +1,10 @@
 import React from 'react'
 import { OverlayTrigger, Tooltip } from 'react-bootstrap'
+import { v4 as uuidv4 } from 'uuid';
+
 
 function ProfilePic({member, size}) {
+    const picId = uuidv4();
     const { image, owner} = member
     const picStyle = {
         width: `${size}px`,
@@ -14,7 +17,7 @@ function ProfilePic({member, size}) {
     //set tooltip id to the same as user's profile id
     //to make sure it is unique.
     const showUsername = (
-        <Tooltip id={`tooltip-${owner.id}`}>
+        <Tooltip id={`tooltip-${picId}`}>
             {owner}
         </Tooltip>
     )
