@@ -17,23 +17,42 @@ function GroupComponent() {
     }
     useEffect(() => {
         fetchGroups();
-    },[], [groups]);
+    }, [], [groups]);
 
 
-  return (
-    <>
-        
-        <Card border="dark"  style={{width: '18rem'}} >
-            <Card.Header >Group Name</Card.Header>
-            <Card.Body>
-                <Card.Title> Some Title</Card.Title>
-                <Card.Text>Description of group if you have one. <br />
-                    else display a standard text.
-                </Card.Text>
-            </Card.Body>
-        </Card>
-    </>
-  )
+    return (
+        <>
+            {groups.length ? (
+                groups.map(group => (
+                    <Card border="dark" style={{ width: '30rem', height: '25rem' }} >
+                        <Card.Header >{group.id}</Card.Header>
+                        <Card.Body>
+                            <Card.Title>{group.name}</Card.Title>
+                            <Card.Text>
+                                {group.description}
+                            </Card.Text>
+                        </Card.Body>
+                        <div>
+                            <p>members</p>
+                            {group.members.map((member) =>
+                                !member.is_owner && (
+                                    <h2 style={{ color: 'red' }}>{member.owner}</h2>
+                                )
+                            )}
+                        </div>
+                        <div>
+                            <p>group owner</p>
+                            {group.members.map((member) =>
+                                member.is_owner && (
+                                    <h2 style={{ color: 'red' }}>{member.owner}</h2>
+                                )
+                            )}
+                        </div>
+                    </Card>
+                ))
+            ) : (<h1>"loading..."</h1>)}
+        </>
+    )
 }
 
 export default GroupComponent
