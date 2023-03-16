@@ -26,7 +26,7 @@ function GroupComponent() {
         <>
             {groups.length ? (
                 groups.map(group => (
-                    <Card border="dark" style={{ width: '30rem', height: '25rem' }} >
+                    <Card key={group.id} border="dark" style={{ width: '30rem', height: '25rem' }} >
                         <Card.Header >{group.id}</Card.Header>
                         <Card.Body>
                             <Card.Title>{group.name}</Card.Title>
@@ -39,7 +39,7 @@ function GroupComponent() {
                             <p>members</p>
                             {group.members.map((member) =>
                                 !member.is_owner && (
-                                    <ProfilePic member={member} size={50} />
+                                    <ProfilePic key={member.id} member={member} size={50} />
                                 )
                             )}
                         </div>
@@ -48,7 +48,7 @@ function GroupComponent() {
                             {/* map through the members and extract the group owner */}
                             {group.members.map((member) =>
                                 member.is_owner && (
-                                    <ProfilePic member={member} size={70} />
+                                    <ProfilePic key={member.id} member={member} size={70} />
 
                                 )
                             )}

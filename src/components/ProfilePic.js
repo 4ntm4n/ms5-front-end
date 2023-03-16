@@ -7,8 +7,11 @@ function ProfilePic({member, size}) {
         height:`${size}px`,
         borderRadius: '50%',
         objectFit: 'cover',
-        objectPosition: 'center'
+        objectPosition: 'center',
     }
+
+    
+
   return (
     <img src={image} alt="profile-pic" style={picStyle} /> 
   )
