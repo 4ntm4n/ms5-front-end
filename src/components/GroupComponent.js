@@ -39,7 +39,7 @@ function GroupComponent() {
                             <p>members</p>
                             {group.members.map((member) =>
                                 !member.is_owner && (
-                                    <ProfilePic key={member.id} member={member} size={50} />
+                                    <ProfilePic key={group.id + member.id} member={member} size={50} />
                                 )
                             )}
                         </div>
@@ -48,7 +48,7 @@ function GroupComponent() {
                             {/* map through the members and extract the group owner */}
                             {group.members.map((member) =>
                                 member.is_owner && (
-                                    <ProfilePic key={member.id} member={member} size={70} />
+                                    <ProfilePic key={group.id + member.id} member={member} size={70} />
 
                                 )
                             )}

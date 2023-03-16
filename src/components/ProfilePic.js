@@ -23,7 +23,7 @@ function ProfilePic({member, size}) {
     )
 
   return (
-    <OverlayTrigger placement="bottom" overlay={showUsername}>
+    <OverlayTrigger placement="top" overlay={showUsername}>
       <img src={image} alt="profile-pic" style={picStyle} /> 
     </OverlayTrigger>
   )
