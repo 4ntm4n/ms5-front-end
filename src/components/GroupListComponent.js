@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { useCurrentUser } from '../contexts/currentUserContext'
 import { axiosReq } from '../api/AxiosDefaults';
 import ProfilePic from './ProfilePic';
+import GroupMembers from './GroupMembers';
 
 function GroupListComponent() {
     const currentUser = useCurrentUser();
@@ -36,15 +37,7 @@ function GroupListComponent() {
                                 {group.description}
                             </Card.Text>
                         </Card.Body>
-                        <div>
-                            {/* map through the members and extract non group owners */}
-                            <p>members</p>
-                            {group.members.map((member) =>
-                                !member.is_owner && (
-                                    <ProfilePic key={group.id + member.id} member={member} size={50} />
-                                )
-                            )}
-                        </div>
+                        <GroupMembers group={group} /> 
                         <div>
                             <p>group owner</p>
                             {/* map through the members and extract the group owner */}
