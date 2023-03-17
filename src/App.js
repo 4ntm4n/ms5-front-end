@@ -10,6 +10,8 @@ import GroupsPage from './pages/GroupsPage';
 import TasksPage from './pages/TasksPage';
 import LoginPage from './pages/auth_pages/LoginPage';
 import SignupPage from './pages/auth_pages/SignupPage';
+import NotFound from './pages/error-pages/NotFound';
+import GroupDetail from './pages/GroupDetail';
 
 
 
@@ -21,6 +23,7 @@ function App() {
 
         <Routes>
           {/* these paths will be public */}
+         
           <Route path='/' element={<HomePage />} />
           <Route path='/login' element={<LoginPage />} />
           <Route path='/signup' element={<SignupPage />} />
@@ -29,8 +32,9 @@ function App() {
 
           <Route path='/feed' element={<FeedPage />} />
           <Route path='/groups' element={<GroupsPage />} />
+          <Route path='/groups/:id' element={<GroupDetail />} />
           <Route path='/tasks' element={<TasksPage />} />
-
+          
         </Routes>
       </div>
   );

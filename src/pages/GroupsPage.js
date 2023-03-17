@@ -1,11 +1,11 @@
 import React from 'react'
-import GroupComponent from '../components/GroupComponent'
+import GroupListComponent from '../components/GroupListComponent'
 
 function GroupsPage() {
     return (
         <>
             <h1>Hello from GroupsPage</h1>
-           <GroupComponent /> 
+           <GroupListComponent /> 
         </>
     )
 }
