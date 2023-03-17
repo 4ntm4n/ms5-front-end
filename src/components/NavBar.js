@@ -1,5 +1,4 @@
-import React from 'react'
-
+import React, { useEffect } from 'react'
 import { Link, NavLink } from 'react-router-dom';
 import { Container, Nav, Navbar, Offcanvas } from 'react-bootstrap';
 import { useCurrentUser  } from '../contexts/currentUserContext';
@@ -7,7 +6,6 @@ import { useCurrentUser  } from '../contexts/currentUserContext';
 
 function NavBar() {
    const currentUser = useCurrentUser();
-   
     // navigation links shown if loggedIn
     const authNav = (
         <>
@@ -26,6 +24,11 @@ function NavBar() {
             <NavLink className="nav-link" to="/signup">Sign Up</NavLink>
         </>
     )
+
+    useEffect(() => {
+        console.log('currentUser changed!', currentUser)
+        
+    }, [currentUser]);
 
     return (
         <>

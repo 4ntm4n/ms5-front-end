@@ -14,16 +14,19 @@ function ProfilePic({ member, size }) {
         objectPosition: 'center',
     }
 
+
     //set tooltip id to the same as user's profile id
     //to make sure it is unique.
-    return (
-        <OverlayTrigger
+
+    {/* <OverlayTrigger
             placement="top"
             delay={{ show: 100, hide: 0 }}
             overlay={<Tooltip id={`tooltip-${picId}`}>{owner}</Tooltip>}
         >
-            <img src={image} alt="profile-pic" style={picStyle} />
-        </OverlayTrigger>
+            
+        </OverlayTrigger> */}
+    return (
+        <img src={image} alt="profile-pic" style={picStyle} />
     )
 }
 

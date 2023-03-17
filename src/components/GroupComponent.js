@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Card } from 'react-bootstrap'
+import { Button, Card } from 'react-bootstrap'
 // import { useCurrentUser } from '../contexts/currentUserContext'
 import { axiosReq } from '../api/AxiosDefaults';
 import ProfilePic from './ProfilePic';
@@ -48,9 +48,10 @@ function GroupComponent() {
                             {/* map through the members and extract the group owner */}
                             <ProfilePic key={group.id + group.group_owner.id} member={group.group_owner} size={70} />
                         </div>
+                        
                     </Card>
                 ))
-            ) : (<h1>"loading..."</h1>)}
+            ) : (<h1>loading...</h1>)}
         </>
     )
 }

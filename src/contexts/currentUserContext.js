@@ -16,20 +16,6 @@ export const CurrentUserProvider = ({ children }) => {
     const navigate = useNavigate() //instead of history in router-dom v6
 
 
-    // set currentUser state to object returned from dj-rest-auth user.
-    const handleMount = async () => {
-
-        try {
-            await axiosRes.get('dj-rest-auth/user/')
-        } catch (error) {
-            console.log(error)
-        }
-    }
-    //start handle mount on mount.
-    useEffect(() => {
-        handleMount();
-    }, []);
-
     const handleLogin = async (loginPayLoad) => {
         try {
             const { data } = await axiosReq.post('/dj-rest-auth/login/', loginPayLoad)
@@ -41,11 +27,29 @@ export const CurrentUserProvider = ({ children }) => {
         }
     }
 
+    // set currentUser state to object returned from dj-rest-auth user.
+    const handleMount = async () => {
+
+        try {
+            const { data } = await axiosRes.get('dj-rest-auth/user/')
+            setCurrentUser(data);
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    //start handle mount on mount.
+    useEffect(() => {
+        handleMount();
+    }, []);
+
+    
+
     useMemo(() => {
         axiosReq.interceptors.request.use(
             async (config) => {
                 if (shouldRefreshToken()) {
                     try {
+                        console.log("token is about to refresh...")
                         await axios.post("/dj-rest-auth/token/refresh/");
                     } catch (err) {
                         setCurrentUser((prevCurrentUser) => {
