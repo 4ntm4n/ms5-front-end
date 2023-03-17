@@ -25,7 +25,6 @@ function LoginPage() {
 
     try {
       handleLogin(loginPayLoad)
-      
     } catch (error) {
       console.log(error)
     }

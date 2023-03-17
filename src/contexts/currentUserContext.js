@@ -16,16 +16,7 @@ export const CurrentUserProvider = ({ children }) => {
     const navigate = useNavigate() //instead of history in router-dom v6
 
 
-    const handleLogin = async (loginPayLoad) => {
-        try {
-            const { data } = await axiosReq.post('/dj-rest-auth/login/', loginPayLoad)
-            setCurrentUser(data);
-            setTokenTimestamp(data);
-            navigate(-1)
-        } catch (error) {
-            console.log(error)
-        }
-    }
+    
 
     // set currentUser state to object returned from dj-rest-auth user.
     const handleMount = async () => {
@@ -43,6 +34,17 @@ export const CurrentUserProvider = ({ children }) => {
     }, []);
 
     
+    const handleLogin = async (loginPayLoad) => {
+        try {
+            console.log("try to fetch user")
+            const { data } = await axiosReq.post('/dj-rest-auth/login/', loginPayLoad)
+            setCurrentUser(data);
+            setTokenTimestamp(data);
+            navigate(-1)
+        } catch (error) {
+            console.log("fetch user error", error)
+        }
+    }
 
     useMemo(() => {
         axiosReq.interceptors.request.use(
@@ -54,7 +56,7 @@ export const CurrentUserProvider = ({ children }) => {
                     } catch (err) {
                         setCurrentUser((prevCurrentUser) => {
                             if (prevCurrentUser) {
-                                navigate('/login');
+                                return navigate('/login');
                             }
                             return null;
                         });
@@ -79,14 +81,18 @@ export const CurrentUserProvider = ({ children }) => {
                             if (prevCurrentUser) {
                                 navigate('/login')
                             }
+                            navigate('/login')
                             return null;
+                            
                         });
                         removeTokenTimestamp();
                     }
                     return axios(error.config);
                 }
                 return Promise.reject(error);
+                
             }
+            
         );
     }, [navigate]);
 

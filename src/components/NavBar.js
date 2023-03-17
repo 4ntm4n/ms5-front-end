@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react'
-import { Link, NavLink } from 'react-router-dom';
+import { Link, Navigate, NavLink, useNavigate } from 'react-router-dom';
 import { Container, Nav, Navbar, Offcanvas } from 'react-bootstrap';
 import { useCurrentUser  } from '../contexts/currentUserContext';
 // import NavDropdown from 'react-bootstrap/NavDropdown';
 
 function NavBar() {
    const currentUser = useCurrentUser();
+   const navigate = useNavigate();
     // navigation links shown if loggedIn
     const authNav = (
         <>
@@ -27,7 +28,6 @@ function NavBar() {
 
     useEffect(() => {
         console.log('currentUser changed!', currentUser)
-        
     }, [currentUser]);
 
     return (
