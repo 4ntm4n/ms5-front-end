@@ -1,10 +1,11 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { Button, Card } from 'react-bootstrap'
 import { Link } from 'react-router-dom';
 import { useCurrentUser } from '../contexts/currentUserContext'
-import { axiosReq } from '../api/AxiosDefaults';
 import ProfilePic from './ProfilePic';
 import GroupMembers from './GroupMembers';
+import { axiosReq } from '../api/AxiosDefaults';
 
 function GroupListComponent() {
     const currentUser = useCurrentUser();

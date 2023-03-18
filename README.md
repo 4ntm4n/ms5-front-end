@@ -79,3 +79,9 @@ https://courses.webdevsimplified.com/react-hooks-simplified
 
 uuid:
 https://www.npmjs.com/package/uuid
+
+
+BUGS:
+
+- making multiple token refresh requests. most likely because their is something wrong with how groups are being 
+fetched with axiosReq. 

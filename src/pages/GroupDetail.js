@@ -1,10 +1,9 @@
-import axios from 'axios'
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import { axiosReq, axiosRes } from '../api/AxiosDefaults'
+import { axiosReq } from '../api/AxiosDefaults';
 import GroupMembers from '../components/GroupMembers';
 import ProfilePic from '../components/ProfilePic';
-
+import TasksListComponent from '../components/TasksListComponent';
 
 function GroupDetail() {
     const { id } = useParams();
@@ -33,8 +32,8 @@ function GroupDetail() {
         <h1>Hello from Group Detail Page!</h1>
         {!isLoading && group.group_owner.owner} is my name <br/>
         {!isLoading && group.name}, is the group name <br/>
-        {!isLoading &&  <GroupMembers group={group} />}  <br/>
-        <>list of tasks components belonging to group</> <br />
+        {!isLoading &&  <GroupMembers group={group} size={70} />}  <br/>
+        <TasksListComponent /> <br />
         <>add new task to this group functionality to this specific group</> <br />
         <>add remove task from this group functionality, if owner </> <br />
         <>link to task details</>

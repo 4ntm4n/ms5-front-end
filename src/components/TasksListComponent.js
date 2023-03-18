@@ -1,14 +1,13 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { axiosReq } from '../api/AxiosDefaults';
-import { useCurrentUser } from '../contexts/currentUserContext';
+import Task from './Task';
 
 function TasksListComponent() {
-    const currentUser = useCurrentUser();
     const [tasks, setTasks] = useState([]);
 
     const fetchTasks = async () => {
         try {
-            const { data } = await axiosReq.get('/tasks/')
+            const { data } = await axios.get('/tasks/')
             console.log(data.results)
             setTasks(data.results)
         } catch (error) {
@@ -20,9 +19,9 @@ function TasksListComponent() {
     }, []);
 
     return (
-        <>
-            {tasks.length && tasks.map(task => (
-                <h1>{task.title}</h1>
+        <> 
+            {tasks.length && tasks.map(task => (   
+                <Task key={task.id} task={task} /> 
             ))}
         </>
     )
