@@ -1,9 +1,12 @@
 import React from 'react'
+import TasksListComponent from '../components/TasksListComponent'
+
 
 function TasksPage() {
+
     return (
         <>
-            <h1>Hello from TaskPage</h1>
+            <TasksListComponent />
         </>
     )
 }

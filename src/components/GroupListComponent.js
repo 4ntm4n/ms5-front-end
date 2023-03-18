@@ -21,7 +21,7 @@ function GroupListComponent() {
     }
     useEffect(() => {
         fetchGroups();
-        console.log(groups)
+        //console.log(groups)
     }, []);
 
 

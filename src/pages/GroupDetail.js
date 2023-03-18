@@ -21,6 +21,7 @@ function GroupDetail() {
             console.log(error)
         }
     }
+
     useEffect(() => {
         fetchGroup();
         
@@ -29,17 +30,14 @@ function GroupDetail() {
 
   return (
     <>  
-        
         <h1>Hello from Group Detail Page!</h1>
         {!isLoading && group.group_owner.owner} is my name <br/>
         {!isLoading && group.name}, is the group name <br/>
         {!isLoading &&  <GroupMembers group={group} />}  <br/>
-        <> Members component</> <br />
         <>list of tasks components belonging to group</> <br />
         <>add new task to this group functionality to this specific group</> <br />
-        <>add remove task to this group functionality </> <br />
+        <>add remove task from this group functionality, if owner </> <br />
         <>link to task details</>
-        
     </>
   )
 }
