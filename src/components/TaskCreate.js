@@ -1,13 +1,15 @@
+import axios from 'axios';
 import React, { useRef, useState, useEffect } from 'react'
 import { Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import { axiosReq, axiosRes } from '../api/AxiosDefaults';
 import { useCurrentUser } from '../contexts/currentUserContext'
 
 function TaskCreate() {
     const currentUser = useCurrentUser();
     const titleRef = useRef(null);
     const descriptionRef = useRef(null);
-    const [payLoad, setPayload] = useState(null)
+    const [tasks, setTasks] = useState(null)
     const navigate = useNavigate();
     /* 
        enpoint: /tasks/create/
@@ -27,21 +29,30 @@ function TaskCreate() {
               a later stage.
     } */
 
-    const handleCreate = (e) => {
-        e.preventDefault();
-        const taskPayload = {
-          owning_group: "set this next",
+    //handle data put into the "create task form" and package it as a tasks.
+    const handleCreate = async (event) => {
+        event.preventDefault();
+        const taskPl = {
+          owning_group: 8,
           title: titleRef.current.value,
           description: descriptionRef.current.value,
         }
-        setPayload(taskPayload)
-        console.log(taskPayload)
-        navigate("/")
+        console.log("form has been filled out...")
+        setTasks(taskPl)
+        console.log(taskPl)
+        try {
+          console.log("form is trying to submit...")
+          await axiosRes.post('/tasks/create/', taskPl)
+          
+        } catch (error) {
+          console.log(error)
+        }
     }
 
+    // this is executed if the tasks is updated and is not "null"
     useEffect(() => {
-      
-    }, [payLoad]);
+      tasks &&  console.log("tasks was updated correctly...")
+    }, [tasks]);
 
     return (
     <>
@@ -55,7 +66,7 @@ function TaskCreate() {
       <Button type="submit">add task</Button>
     </form>
 
-      <p> payload: {payLoad? (<>{payLoad.title} <br /> {payLoad.description} </>):("no payload yet")}</p>
+      <p> tasks: {tasks? (<>{tasks.title} <br /> {tasks.description} </>):("no tasks yet")}</p>
     </>
 
   )
