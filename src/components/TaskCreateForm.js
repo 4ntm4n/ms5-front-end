@@ -1,11 +1,11 @@
 import axios from 'axios';
 import React, { useRef, useState, useEffect } from 'react'
-import { Button } from 'react-bootstrap';
+import { Form, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { axiosReq, axiosRes } from '../api/AxiosDefaults';
 import { useCurrentUser } from '../contexts/currentUserContext'
 
-function TaskCreate() {
+function TaskCreateForm() {
     const currentUser = useCurrentUser();
     const titleRef = useRef(null);
     const descriptionRef = useRef(null);
@@ -32,21 +32,21 @@ function TaskCreate() {
     //handle data put into the "create task form" and package it as a tasks.
     const handleCreate = async (event) => {
         event.preventDefault();
-        const taskPl = {
+        const taskPayload = {
           owning_group: 8,
           title: titleRef.current.value,
           description: descriptionRef.current.value,
         }
         console.log("form has been filled out...")
-        setTasks(taskPl)
-        console.log(taskPl)
+        setTasks(taskPayload)
+        console.log(taskPayload)
         try {
           console.log("form is trying to submit...")
-          await axiosRes.post('/tasks/create/', taskPl)
-          
+          await axiosRes.post('/tasks/create/', taskPayload)
         } catch (error) {
           console.log(error)
         }
+        navigate(-1)
     }
 
     // this is executed if the tasks is updated and is not "null"
@@ -57,14 +57,28 @@ function TaskCreate() {
     return (
     <>
     
-    <form onSubmit={handleCreate}>
-      <label for="taskTitle" >Task Title: </label>
-      <input placeholder="task title" id="taskTitle" name="taskTitle" ref={titleRef}></input> <br/>
+    <Form onSubmit={handleCreate}>
+      <Form.Group className="mb-3" controlId="taskTitle">
+        <Form.Label>Task Title</Form.Label>
+        <Form.Control 
+          placeholder="task title" 
+          id="taskTitle" 
+          name="taskTitle" 
+          ref={titleRef} 
+        />
+      </Form.Group>
 
-      <label for="taskDescription">Task desc:</label>
-      <textArea placeholder="task description" id="taskDescription" name="taskDescription" ref={descriptionRef}></textArea> <br />
-      <Button type="submit">add task</Button>
-    </form>
+      <Form.Group className="mb-3" controlId="taskDescription">
+        <Form.Label>Task Title</Form.Label>
+        <Form.Control 
+          placeholder="task description" 
+          id="taskDescription" 
+          name="taskDescription" 
+          ref={descriptionRef} 
+        />
+      </Form.Group>
+      <Button type="submmit">Create new task</Button>
+    </Form>
 
       <p> tasks: {tasks? (<>{tasks.title} <br /> {tasks.description} </>):("no tasks yet")}</p>
     </>
@@ -72,4 +86,4 @@ function TaskCreate() {
   )
 }
 
-export default TaskCreate
+export default TaskCreateForm

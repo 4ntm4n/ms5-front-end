@@ -1,11 +1,11 @@
 import React from 'react'
-import TaskCreate from '../components/TaskCreate'
+import TaskCreateForm from '../components/TaskCreateForm'
 
 function HomePage() {
   return (
     <>
       <h1>Hello from HomePage</h1>
-      <TaskCreate></TaskCreate>
+      <TaskCreateForm />
     </>
   )
 }
