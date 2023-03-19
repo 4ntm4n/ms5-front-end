@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { axiosReq, axiosRes } from '../api/AxiosDefaults';
 import { useCurrentUser } from '../contexts/currentUserContext'
 
-function TaskCreateForm() {
+function TaskCreateForm({id, taskAdded}) {
     const currentUser = useCurrentUser();
     const titleRef = useRef(null);
     const descriptionRef = useRef(null);
@@ -33,7 +33,7 @@ function TaskCreateForm() {
     const handleCreate = async (event) => {
         event.preventDefault();
         const taskPayload = {
-          owning_group: 8,
+          owning_group: id,
           title: titleRef.current.value,
           description: descriptionRef.current.value,
         }
@@ -43,10 +43,10 @@ function TaskCreateForm() {
         try {
           console.log("form is trying to submit...")
           await axiosRes.post('/tasks/create/', taskPayload)
+          taskAdded()
         } catch (error) {
           console.log(error)
         }
-        navigate(-1)
     }
 
     // this is executed if the tasks is updated and is not "null"
@@ -77,7 +77,7 @@ function TaskCreateForm() {
           ref={descriptionRef} 
         />
       </Form.Group>
-      <Button type="submmit">Create new task</Button>
+      <Button type="submit">Create new task</Button>
     </Form>
 
       <p> tasks: {tasks? (<>{tasks.title} <br /> {tasks.description} </>):("no tasks yet")}</p>

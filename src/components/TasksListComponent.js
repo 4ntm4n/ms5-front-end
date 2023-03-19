@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import Task from './Task';
 
-function TasksListComponent() {
+function TasksListComponent({tasksUpdated}) {
     const [tasks, setTasks] = useState([]);
 
     const fetchTasks = async () => {
@@ -16,7 +16,7 @@ function TasksListComponent() {
     }
     useEffect(() => {
         fetchTasks();
-    }, []);
+    }, [tasksUpdated]);
 
     return (
         <> 
