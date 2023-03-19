@@ -12,4 +12,10 @@ export const useTask = () => {
             console.log(error)
         }
     };
+
+    const updateTaskList = () => {
+        context.setTasks((prevTasks) => [...prevTasks, newTask])
+    }
+
+    
 }
