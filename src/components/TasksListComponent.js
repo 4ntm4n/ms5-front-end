@@ -3,23 +3,22 @@ import React, { useEffect, useState } from 'react'
 import Task from './Task';
 import { useTask } from '../hooks/useTask'; 
 
-function TasksListComponent({tasksUpdated}) {
-    const {tasks, setTasks } = useTask();
+function TasksListComponent({}) {
+    const {tasks, fetchTasks } = useTask();
 
-    
-    const fetchTasks = async () => {
+    const handleMount = async () => {
         try {
-            const { data } = await axios.get('/tasks/')
-            console.log(data.results)
-            setTasks(data.results)
+            fetchTasks();
+
         } catch (error) {
             console.log(error)
         }
     }
 
     useEffect(() => {
-        fetchTasks();
-    }, [tasksUpdated]);
+        tasks && handleMount();
+    }, []);
+
 
     return (
         <> 

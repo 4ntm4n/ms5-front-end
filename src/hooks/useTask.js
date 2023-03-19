@@ -16,7 +16,8 @@ export const useTask = () => {
     const fetchTasks = async () => {
         try {
             const { data } = await axiosReq.get('/tasks/');
-            setTasks(data.response)
+            console.log("data being set: ", data)
+            setTasks(data.results)
         } catch (error) {
             console.log(error)
         }
