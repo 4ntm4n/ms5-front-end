@@ -1,11 +1,9 @@
-import { createContext, useContext} from 'react'
+import { useContext } from 'react'
 import { axiosReq } from '../api/AxiosDefaults'
-import TaskContext from '../contexts/TaskContext'
 import { useTasks } from '../contexts/TaskContext';
 
-
 export const useTask = () => {
-    const context = useContext(TaskContext);
+    const { tasks, setTasks } = useTasks();
 
     const fetchTask = async (taskId) => {
         try {
@@ -17,14 +15,15 @@ export const useTask = () => {
 
     const fetchTasks = async () => {
         try {
-            await axiosReq.get(`/tasks/${taskId}/`)
+            const { data } = await axiosReq.get('/tasks/');
+            setTasks(data.response)
         } catch (error) {
             console.log(error)
         }
     };
 
     const updateTaskList = (newTask) => {
-        context.setTasks((prevTasks) => [...prevTasks, newTask])
+        setTasks((prevTasks) => [...prevTasks, newTask])
     }
 
     /* 
@@ -38,7 +37,7 @@ export const useTask = () => {
     */
 
     const deleteTaskFromList = (taskId) => {
-        context.setTasks((prevTasks) => prevTasks.filter((task) => task.id !== taskId))
+        setTasks((prevTasks) => prevTasks.filter((task) => task.id !== taskId))
     }
 
     /* 
@@ -58,11 +57,11 @@ export const useTask = () => {
     
     */
     return {
-        tasks: context.tasks,
-        setTasks: context.setTasks,
+        tasks,
+        setTasks,
         fetchTask,
         fetchTasks,
         updateTaskList,
         deleteTaskFromList,
-    }
+    };
 }
