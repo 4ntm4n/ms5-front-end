@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react"
+import { createContext, useContext, useEffect, useState } from "react"
 
 const TaskContext = createContext();
 
@@ -17,6 +17,11 @@ export const useTasks = () => {
 
 export const TaskProvider = ({ children }) => {
     const [tasks, setTasks] = useState([]);
+    const [taskListChange, setTaskListChange] = useState(false)
+
+    const handleTaskListUpdate = () => {
+        setHasChanged(prevHasChanged => !prevHasChanged)
+    }
 
     const value = {
         tasks,
@@ -24,7 +29,7 @@ export const TaskProvider = ({ children }) => {
     }
 
     return (
-        <TaskContext.Provider value={value}>
+        <TaskContext.Provider value={{tasks, setTasks, handleTaskListUpdate}}>
             {children}
         </TaskContext.Provider> 
     )

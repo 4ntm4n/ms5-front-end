@@ -7,7 +7,6 @@ import ProfilePic from '../components/ProfilePic';
 import TaskCreateForm from '../components/TaskCreateForm';
 import TasksListComponent from '../components/TasksListComponent';
 
-
 function GroupDetail() {
     const { id } = useParams();
     const [group, setGroup] = useState();
