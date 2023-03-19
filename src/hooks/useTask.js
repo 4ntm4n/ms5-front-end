@@ -1,7 +1,7 @@
 import { createContext, useContext} from 'react'
+import { axiosReq } from '../api/AxiosDefaults'
 import TaskContext from '../contexts/TaskContext'
-import { TaskProvider } from '../contexts/TaskContext'
-
+import { useTasks } from '../contexts/TaskContext';
 
 
 export const useTask = () => {
@@ -9,7 +9,15 @@ export const useTask = () => {
 
     const fetchTask = async (taskId) => {
         try {
-            await axios.get(`/tasks/${taskId}/`)
+            await axiosReq.get(`/tasks/${taskId}/`)
+        } catch (error) {
+            console.log(error)
+        }
+    };
+
+    const fetchTasks = async () => {
+        try {
+            await axiosReq.get(`/tasks/${taskId}/`)
         } catch (error) {
             console.log(error)
         }
@@ -53,6 +61,7 @@ export const useTask = () => {
         tasks: context.tasks,
         setTasks: context.setTasks,
         fetchTask,
+        fetchTasks,
         updateTaskList,
         deleteTaskFromList,
     }

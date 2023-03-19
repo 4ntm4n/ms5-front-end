@@ -1,10 +1,12 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import Task from './Task';
+import { useTask } from '../hooks/useTask'; 
 
 function TasksListComponent({tasksUpdated}) {
-    const [tasks, setTasks] = useState([]);
+    const {tasks, setTasks } = useTask();
 
+    
     const fetchTasks = async () => {
         try {
             const { data } = await axios.get('/tasks/')
@@ -14,6 +16,7 @@ function TasksListComponent({tasksUpdated}) {
             console.log(error)
         }
     }
+
     useEffect(() => {
         fetchTasks();
     }, [tasksUpdated]);
