@@ -13,3 +13,20 @@ export const useTasks = () => {
 
     return context;
 }
+
+
+export const TaskProvider = ({ children }) => {
+    const [tasks, setTasks] = useState([]);
+
+    const value = {
+        tasks,
+        setTasks,
+    }
+
+    return (
+        <TaskContext.Provider value={value}>
+            {children}
+        </TaskContext.Provider> 
+    )
+}
+
