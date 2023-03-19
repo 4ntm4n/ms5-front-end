@@ -17,19 +17,10 @@ export const useTasks = () => {
 
 export const TaskProvider = ({ children }) => {
     const [tasks, setTasks] = useState([]);
-    const [taskListChange, setTaskListChange] = useState(false)
 
-    const handleTaskListUpdate = () => {
-        setHasChanged(prevHasChanged => !prevHasChanged)
-    }
-
-    const value = {
-        tasks,
-        setTasks,
-    }
 
     return (
-        <TaskContext.Provider value={{tasks, setTasks, handleTaskListUpdate}}>
+        <TaskContext.Provider value={{tasks, setTasks}}>
             {children}
         </TaskContext.Provider> 
     )
