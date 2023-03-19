@@ -1,42 +1,7 @@
 import React from 'react'
-import { Card } from 'react-bootstrap'
+import { Button, Card } from 'react-bootstrap'
 function Task({ task }) {
-    /* completed
-: 
-false
-created_at
-: 
-"03 Mar 2023"
-description
-: 
-"some description"
-group_name
-: 
-"sfsdf"
-id
-: 
-5
-in_progress
-: 
-false
-owner
-: 
-null
-owner_name
-: 
-null
-owner_profile_image
-: 
-null
-owning_group
-: 
-8
-title
-: 
-"some werwe"
-updated_at
-: 
-"03 Mar 2023"*/
+
     const {
         id,
         title,
@@ -48,6 +13,10 @@ updated_at
         owning_group,
 
     } = task
+
+    const handleDelete = () => {
+        console.log("delting task with id: ", id)
+    }
 
   return (
         <Card border="warning" >
@@ -61,6 +30,8 @@ updated_at
             
             <span>mark as complete</span>
             <span></span>
+
+            <Button variant="danger" onClick={handleDelete}>delete forever</Button>
         </Card>
   )
 }
