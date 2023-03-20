@@ -1,9 +1,11 @@
 import React from 'react'
 import { Button, Card } from 'react-bootstrap'
 import { axiosReq } from '../api/AxiosDefaults'
+import { taskContext } from '../contexts/TaskContext'
+import { useTask } from '../hooks/useTask'
 
 function Task({ task }) {
-
+    const { fetchTasks, deleteTaskFromList, updateTaskList} = useTask();
     const {
         id,
         title,
@@ -17,12 +19,15 @@ function Task({ task }) {
     } = task
 
     const handleDelete = async () => {
-        console.log("delting task with id: ", id)
         try {
-            await axiosReq.delete(`/tasks/${id}/`)
-        } catch (error) {
-            console.log(error)
-        }
+            await axiosReq.delete(`/tasks/${id}`);
+            deleteTaskFromList(id);
+            fetchTasks()
+          } catch (error) {
+            console.log(error);
+          }
+        
+        
     }
 
   return (

@@ -6,35 +6,14 @@ import GroupMembers from '../components/GroupMembers';
 import ProfilePic from '../components/ProfilePic';
 import TaskCreateForm from '../components/TaskCreateForm';
 import TasksListComponent from '../components/TasksListComponent';
+import { useTask } from '../hooks/useTask';
 
 function GroupDetail() {
     const { id } = useParams();
     const [group, setGroup] = useState();
     const [isLoading, setIsLoading] = useState(true);
-    const [tasksUpdated, setTasksUpdated] = useState(false);
-
-    const fetchGroup = async () => {
-        try {
-            const { data } = await axiosReq.get(`/groups/${id}/`)
-            setGroup( data )
-            
-            console.log(data)
-            setIsLoading(false)
-        } catch (error) {
-            console.log(error)
-        }
-    }
-
-    useEffect(() => {
-        fetchGroup();
-    }, [tasksUpdated]);
-
-    const handleTaskListUpdate = () => {
-        console.log("handleTaskListUpdate called!")
-        setTasksUpdated(prevTasksUpdated => !prevTasksUpdated)
-    }
-
-
+    const {tasksUpdated, setTasksUpdated, fetchTasks} = useTask();
+    
   return (
     <>  
         <h1>Hello from Group Detail Page!</h1>
@@ -42,7 +21,7 @@ function GroupDetail() {
         {!isLoading && group.name}, is the group name <br/>
         {!isLoading &&  <GroupMembers group={group} size={70} />}  <br/>
         <TasksListComponent tasksUpdated={tasksUpdated} /> <br />
-        <TaskCreateForm id={id} taskAdded={handleTaskListUpdate} />
+        <TaskCreateForm id={id}  />
         <>add remove task from this group functionality, if owner </> <br />
         <>link to task details</>
     </>

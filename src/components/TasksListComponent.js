@@ -3,13 +3,13 @@ import React, { useEffect, useState } from 'react'
 import Task from './Task';
 import { useTask } from '../hooks/useTask'; 
 
+
 function TasksListComponent({}) {
     const {tasks, fetchTasks } = useTask();
 
     const handleMount = async () => {
         try {
             fetchTasks();
-
         } catch (error) {
             console.log(error)
         }

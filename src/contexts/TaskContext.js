@@ -10,17 +10,15 @@ export const useTasks = () => {
     if (!context) {
         throw new Error('useTasks must be used within a TaskProider!')
     }
-
     return context;
 }
 
-
 export const TaskProvider = ({ children }) => {
     const [tasks, setTasks] = useState([]);
-
+    const [refresh, setRefresh] = useState(false);
 
     return (
-        <TaskContext.Provider value={{tasks, setTasks}}>
+        <TaskContext.Provider value={{tasks, setTasks, refresh, setRefresh}}>
             {children}
         </TaskContext.Provider> 
     )
