@@ -16,7 +16,7 @@ function TasksListComponent({}) {
     }
 
     useEffect(() => {
-        tasks && handleMount();
+        handleMount();
     }, []);
 
 
