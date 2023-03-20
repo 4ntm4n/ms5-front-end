@@ -3,7 +3,7 @@ import { axiosReq } from '../api/AxiosDefaults'
 import { useTasks } from '../contexts/TaskContext';
 
 export const useTask = () => {
-    const { tasks, setTasks } = useTasks();
+    const { tasks, setTasks, isUpdated, setIsUpdated} = useTasks();
 
     const fetchTask = async (taskId) => {
         try {
@@ -61,6 +61,8 @@ export const useTask = () => {
     return {
         tasks,
         setTasks,
+        isUpdated,
+        setIsUpdated,
         fetchTask,
         fetchTasks,
         updateTaskList,

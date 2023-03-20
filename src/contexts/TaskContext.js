@@ -15,10 +15,10 @@ export const useTasks = () => {
 
 export const TaskProvider = ({ children }) => {
     const [tasks, setTasks] = useState([]);
-    const [refresh, setRefresh] = useState(false);
+    const [isUpdated, setIsUpdated] = useState(false);
 
     return (
-        <TaskContext.Provider value={{tasks, setTasks, refresh, setRefresh}}>
+        <TaskContext.Provider value={{tasks, setTasks, isUpdated, setIsUpdated}}>
             {children}
         </TaskContext.Provider> 
     )

@@ -4,6 +4,8 @@ import { axiosReq } from '../api/AxiosDefaults'
 import { taskContext } from '../contexts/TaskContext'
 import { useTask } from '../hooks/useTask'
 
+
+
 function Task({ task }) {
     const { fetchTasks, deleteTaskFromList, updateTaskList} = useTask();
     const {
@@ -15,7 +17,6 @@ function Task({ task }) {
         in_progress,
         completed,
         owning_group,
-
     } = task
 
     const handleDelete = async () => {
