@@ -1,25 +1,25 @@
 import React, { useEffect, useState } from 'react'
 import { axiosRes } from '../api/AxiosDefaults';
 import Task from './Task';
+import { useTasks } from '../contexts/TasksContext';
 
-
-function TasksListComponent() {
+function TasksListComponent({ tasksUpdate }) {
+    const taskupdateToggle = useTasks();
     const [tasks, setTasks] = useState([]);
 
     const fetchTasks = async () => {
         try {
             const { data } = await axiosRes.get('/tasks/');
             setTasks(data.results)
-            console.log(data)
+            console.log("tasksList component: ", data.results)
         } catch (error) {
             console.log(error)
         }
     };
 
     useEffect(() => {
-        fetchTasks();
-        
-    },[])
+        fetchTasks()
+    }, [tasksUpdate])
 
     return (
         <>

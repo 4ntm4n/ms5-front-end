@@ -2,15 +2,13 @@ import axios from 'axios';
 import React, { useRef, useState, useEffect } from 'react'
 import { Form, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import { axiosReq, axiosRes } from '../api/AxiosDefaults';
-import { useCurrentUser } from '../contexts/currentUserContext'
+import { axiosRes } from '../api/AxiosDefaults';
 
 function TaskCreateForm({ id, taskAdded }) {
-  const currentUser = useCurrentUser();
+  const [tasks, setTasks] = useState(null)
   const titleRef = useRef(null);
   const descriptionRef = useRef(null);
-  const [tasks, setTasks] = useState(null)
-  const navigate = useNavigate();
+  
   /* 
      enpoint: /tasks/create/
      accepts:
@@ -37,13 +35,11 @@ function TaskCreateForm({ id, taskAdded }) {
       title: titleRef.current.value,
       description: descriptionRef.current.value,
     }
-    console.log("form has been filled out...")
+    console.log("create form has been filled out... ", taskPayload)
     setTasks(taskPayload)
-    console.log(taskPayload)
     try {
-      console.log("form is trying to submit...")
+      console.log("create form is trying to submit...")
       await axiosRes.post('/tasks/create/', taskPayload)
-      taskAdded()
     } catch (error) {
       console.log(error)
     }

@@ -1,9 +1,11 @@
 import React from 'react'
 import { Button, Card } from 'react-bootstrap'
 import { axiosReq } from '../api/AxiosDefaults'
-
+import { useTasksUpdate } from '../contexts/TasksContext'
 
 function Task({ task }) {
+    const taskListUpdate = useTasksUpdate();
+
     const {
         id,
         title,
@@ -16,12 +18,13 @@ function Task({ task }) {
     } = task
 
     const handleDelete = async () => {
-        try {
-            await axiosReq.delete(`/tasks/${id}`);
-          } catch (error) {
-            console.log(error);
-          }   
-    }
+      try {
+          await axiosReq.delete(`/tasks/${id}`)
+          taskListUpdate()
+      } catch (error) {
+          console.log(error)
+      }   
+  }
 
   return (
         <Card border="warning" >
