@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Button, Card } from 'react-bootstrap'
 import { axiosReq } from '../api/AxiosDefaults'
+import { useCurrentUser } from '../contexts/currentUserContext';
 import { useTasksUpdate } from '../contexts/TasksContext'
 
 function Task({ task }) {
+    const currentUser = useCurrentUser();
     const taskListUpdate = useTasksUpdate();
 
     const {
@@ -17,6 +19,15 @@ function Task({ task }) {
         owning_group,
     } = task
 
+    const payload = {
+      title: task.title,
+      description: task.description,
+      owning_group: task.owning_group,
+      owner: task.owner,
+      in_progress,
+      completed,
+    }
+
     const handleDelete = async () => {
       try {
           await axiosReq.delete(`/tasks/${id}`)
@@ -26,10 +37,19 @@ function Task({ task }) {
       }   
   }
 
-  const handleUpdate =() => {
-    console.log("taking ownership :", id)
+  const handleUpdate = async () => {
+    payload.in_progress = true
+    try {
+      const {data} = await axiosReq.put(`/tasks/${id}/`, payload)
+      console.log(data.response)
+      taskListUpdate()
+    } catch (error) {
+      console.log(error)
+    }
+    console.log("taking ownership :", id, "from user:", currentUser.profile_id)
 }   
 
+ 
   return (
         <Card border="warning" >
             
@@ -38,13 +58,13 @@ function Task({ task }) {
                 <h5>task id {id}</h5>
                 {description}
             </Card.Body>
-            {in_progress? (<p>{owner_name}</p>): (<p>take ownership</p>)}
+            {in_progress? (<p>{owner_name}</p>): (<Button variant="primary" onClick={ handleUpdate}>take ownership</Button>)}
             
             <span>mark as complete</span>
             <span></span>
 
             <Button variant="danger" onClick={handleDelete}>delete forever</Button>
-            <Button variant="primary" onClick={handleUpdate}>take ownership</Button>
+            
         </Card>
   )
 }
