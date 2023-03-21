@@ -80,6 +80,8 @@ https://courses.webdevsimplified.com/react-hooks-simplified
 uuid:
 https://www.npmjs.com/package/uuid
 
+use Context tutorial:
+https://www.youtube.com/watch?v=5LrDIWkK_Bc
 
 BUGS:
 

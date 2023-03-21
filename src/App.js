@@ -12,7 +12,7 @@ import LoginPage from './pages/auth_pages/LoginPage';
 import SignupPage from './pages/auth_pages/SignupPage';
 import NotFound from './pages/error-pages/NotFound';
 import GroupDetail from './pages/GroupDetail';
-import { TaskProvider } from './contexts/TaskContext';
+import { TasksProvider } from './contexts/TasksContext';
 
 
 
@@ -30,9 +30,9 @@ function App() {
           {/* these paths needs to be protected paths, "if auth." */}
           {/* adding route to wrap around protected route, use "/" parent route */}
           <Route path="/" element={
-            <TaskProvider> 
+            <TasksProvider> 
               <Outlet />  {/* wrapping TaskProvider around outlet since route has to be 1st child of Router. */}
-            </TaskProvider>
+            </TasksProvider>
             } >
             <Route path='/groups' element={<GroupsPage />} />
             <Route path='/groups/:id' element={<GroupDetail />} />

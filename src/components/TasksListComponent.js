@@ -1,30 +1,31 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react'
+import { axiosRes } from '../api/AxiosDefaults';
 import Task from './Task';
-import { useTask } from '../hooks/useTask'; 
 
 
-function TasksListComponent({}) {
-    const {tasks, fetchTasks } = useTask();
+function TasksListComponent() {
+    const [tasks, setTasks] = useState([]);
 
-    const handleMount = async () => {
+    const fetchTasks = async () => {
         try {
-            fetchTasks();
+            const { data } = await axiosRes.get('/tasks/');
+            setTasks(data.results)
+            console.log(data)
         } catch (error) {
             console.log(error)
         }
-    }
+    };
 
     useEffect(() => {
-        handleMount();
-    }, []);
-
+        fetchTasks();
+        
+    },[])
 
     return (
-        <> 
-            {tasks.length && tasks.map(task => (   
+        <>
+            {tasks.length ? (tasks.map(task => (   
                 <Task key={task.id} task={task} /> 
-            ))}
+            ))) : ("loading...") }
         </>
     )
 }

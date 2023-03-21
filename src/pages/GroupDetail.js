@@ -6,13 +6,12 @@ import GroupMembers from '../components/GroupMembers';
 import ProfilePic from '../components/ProfilePic';
 import TaskCreateForm from '../components/TaskCreateForm';
 import TasksListComponent from '../components/TasksListComponent';
-import { useTask } from '../hooks/useTask';
+
 
 function GroupDetail() {
     const { id } = useParams();
     const [group, setGroup] = useState();
     const [isLoading, setIsLoading] = useState(true);
-    const {tasksUpdated, setTasksUpdated, fetchTasks} = useTask();
     
   return (
     <>  
@@ -20,7 +19,7 @@ function GroupDetail() {
         {!isLoading && group.group_owner.owner} is my name <br/>
         {!isLoading && group.name}, is the group name <br/>
         {!isLoading &&  <GroupMembers group={group} size={70} />}  <br/>
-        <TasksListComponent tasksUpdated={tasksUpdated} /> <br />
+        <TasksListComponent groupId={id} /> <br />
         <TaskCreateForm id={id}  />
         <>add remove task from this group functionality, if owner </> <br />
         <>link to task details</>
