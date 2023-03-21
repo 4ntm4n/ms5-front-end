@@ -26,6 +26,10 @@ function Task({ task }) {
       }   
   }
 
+  const handleUpdate =() => {
+    console.log("taking ownership :", id)
+}   
+
   return (
         <Card border="warning" >
             
@@ -40,6 +44,7 @@ function Task({ task }) {
             <span></span>
 
             <Button variant="danger" onClick={handleDelete}>delete forever</Button>
+            <Button variant="primary" onClick={handleUpdate}>take ownership</Button>
         </Card>
   )
 }

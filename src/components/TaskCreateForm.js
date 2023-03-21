@@ -31,9 +31,12 @@ function TaskCreateForm({ id }) {
   const handleCreate = async (event) => {
     event.preventDefault();
     const taskPayload = {
-      owning_group: id,
       title: titleRef.current.value,
       description: descriptionRef.current.value,
+      owning_group: id,
+      owner: null,
+      in_progress:false,
+      completed: false,
     }
     console.log("create form has been filled out... ", taskPayload)
     try {
@@ -44,7 +47,6 @@ function TaskCreateForm({ id }) {
       console.log(error)
     }
   }
-
 
   return (
     <>
