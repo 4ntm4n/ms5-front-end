@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { axiosRes } from '../api/AxiosDefaults';
 import Task from './Task';
-import { useTasks } from '../contexts/TasksContext';
 
 function TasksListComponent({ tasksUpdate }) {
     const [tasks, setTasks] = useState([]);

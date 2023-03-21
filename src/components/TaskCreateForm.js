@@ -1,13 +1,11 @@
 import axios from 'axios';
-import React, { useRef, useState, useEffect } from 'react'
+import React, { useRef} from 'react'
 import { Form, Button } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
 import { axiosRes } from '../api/AxiosDefaults';
 import { useTasksUpdate } from '../contexts/TasksContext';
 
 function TaskCreateForm({ id }) {
   const taskListUpdate = useTasksUpdate();
-  const [tasks, setTasks] = useState(null)
   const titleRef = useRef(null);
   const descriptionRef = useRef(null);
   
@@ -38,7 +36,6 @@ function TaskCreateForm({ id }) {
       description: descriptionRef.current.value,
     }
     console.log("create form has been filled out... ", taskPayload)
-    setTasks(taskPayload)
     try {
       console.log("create form is trying to submit...")
       await axiosRes.post('/tasks/create/', taskPayload)
@@ -48,10 +45,6 @@ function TaskCreateForm({ id }) {
     }
   }
 
-  // this is executed if the tasks is updated and is not "null"
-  useEffect(() => {
-    tasks && console.log("tasks was updated correctly...")
-  }, [tasks]);
 
   return (
     <>
