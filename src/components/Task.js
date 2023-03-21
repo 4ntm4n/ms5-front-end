@@ -37,8 +37,14 @@ function Task({ task }) {
       }   
   }
 
-  const handleUpdate = async () => {
-    payload.in_progress = true
+  const handleUpdate = async (e) => {
+    if (payload.in_progress) {
+      payload.completed = false
+      payload.in_progress = false
+
+    } else {
+      payload.in_progress = true
+    }
     try {
       const {data} = await axiosReq.put(`/tasks/${id}/`, payload)
       console.log(data.response)
@@ -58,7 +64,7 @@ function Task({ task }) {
                 <h5>task id {id}</h5>
                 {description}
             </Card.Body>
-            {in_progress? (<p>{owner_name}</p>): (<Button variant="primary" onClick={ handleUpdate}>take ownership</Button>)}
+            {in_progress? (<p>{owner_name}</p>): (<Button name="claim" variant="primary" onClick={(e) => handleUpdate(e)}>take ownership</Button>)}
             
             <span>mark as complete</span>
             <span></span>
