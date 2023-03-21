@@ -14,7 +14,7 @@ function GroupDetail() {
     <>  
         <h1>Hello from Group Detail Page!</h1>
 
-        <TasksListComponent groupId={id} tasksUpdate={tasksUpdate} /> 
+        <TasksListComponent id={id} tasksUpdate={tasksUpdate} /> 
         <TaskCreateForm id={id}  />
 
     </>
