@@ -38,7 +38,7 @@ function Task({ task }) {
   }
 
   const handleUpdate = async (e) => {
-    if (payload.in_progress) {
+    if (payload.in_progress && e.target.name==="claim") {
       payload.completed = false
       payload.in_progress = false
 
