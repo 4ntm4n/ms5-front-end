@@ -4,7 +4,6 @@ import Task from './Task';
 import { useTasks } from '../contexts/TasksContext';
 
 function TasksListComponent({ tasksUpdate }) {
-    const taskupdateToggle = useTasks();
     const [tasks, setTasks] = useState([]);
 
     const fetchTasks = async () => {

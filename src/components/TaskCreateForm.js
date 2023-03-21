@@ -3,8 +3,10 @@ import React, { useRef, useState, useEffect } from 'react'
 import { Form, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { axiosRes } from '../api/AxiosDefaults';
+import { useTasksUpdate } from '../contexts/TasksContext';
 
-function TaskCreateForm({ id, taskAdded }) {
+function TaskCreateForm({ id }) {
+  const taskListUpdate = useTasksUpdate();
   const [tasks, setTasks] = useState(null)
   const titleRef = useRef(null);
   const descriptionRef = useRef(null);
@@ -40,6 +42,7 @@ function TaskCreateForm({ id, taskAdded }) {
     try {
       console.log("create form is trying to submit...")
       await axiosRes.post('/tasks/create/', taskPayload)
+      taskListUpdate()
     } catch (error) {
       console.log(error)
     }
