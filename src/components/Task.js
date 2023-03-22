@@ -40,22 +40,26 @@ function Task({ task }) {
   }
 
   const handleUpdate = async (e) => {
-    if (payload.in_progress && e.target.name==="claim") {
-      payload.completed = false
-      payload.in_progress = false
-
-    } else {
+    if (!payload.in_progress && e.target.name==="claim") {
       payload.in_progress = true
     }
     try {
-      const {data} = await axiosReq.put(`/tasks/${id}/`, payload)
-      console.log(data.response)
-      taskListUpdate()
+        await axiosReq.put(`/tasks/${id}/`, payload)
+        taskListUpdate()
     } catch (error) {
-      console.log(error)
     }
-    console.log("taking ownership :", id, "from user:", currentUser.profile_id)
 }   
+
+const handlComplete = async (e) => {
+  if (payload.in_progress && e.target.name==="complete") {
+      payload.completed = true
+  }
+  try {
+      await axiosReq.put(`/tasks/${id}/`, payload)
+      taskListUpdate()
+  } catch (error) {
+  }
+} 
 
  
   return (
@@ -66,13 +70,27 @@ function Task({ task }) {
                 <h5>task id {id}</h5>
                 {description}
             </Card.Body>
-            {in_progress? (<p>{owner_name}</p>): (<Button name="claim" variant="primary" onClick={(e) => handleUpdate(e)}>take ownership</Button>)}
+            {in_progress? (
+              <>
+                <p>{owner_name}</p>
+                <Button 
+                  name="complete" 
+                  variant="warning" 
+                  onClick={(e) => handleUpdate(e)}>
+                  complete task
+                </Button>
+              </>
+            ): (
+            <Button 
+              name="claim" 
+              variant="primary" 
+              onClick={(e) => handleUpdate(e)}>
+              take ownership
+            </Button>)}
             
             <span>mark as complete</span>
             <span></span>
-
             <Button variant="danger" onClick={handleDelete}>delete forever</Button>
-            
         </Card>
   )
 }
