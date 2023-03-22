@@ -44,19 +44,20 @@ return (
              * with each itteration of the profiles map that we are inside right now.
              * if the profile.owner matches any  member.owner, it means that the profile, is already
              * in the members list of the group. and we add a remove button, else we render an add button. 
-             * Note. it will only return a profile of profile is not group owner, cuz the group owner can not
-             * remove itself from the group on the server side in this app...
+             * Note. it will only return any button at all if its not the group owner, cuz group owner can not
+             * remove itself from the group on the server side...
             */
-            const memberMatch = groupObj.members.map(member => member.owner.id === profile.owner.id);
+            const memberMatch = groupObj.members.find(member => member.owner === profile.owner);
             const groupOwner = groupObj.group_owner.owner
-            console.log(groupOwner)
-            if (groupOwner === profile.owner)
-                return null
             
+            if (profile.owner === groupOwner) {
+                return null; 
+              }
             return  (
                 <li key ={profile.id} >
                     {profile.owner}
-                    {memberMatch ? <button>remove</button> : <button>add</button>}
+                    {memberMatch && <button>remove</button>}
+                    {!memberMatch && <button>add</button>}
                 </li>
                 
             )
