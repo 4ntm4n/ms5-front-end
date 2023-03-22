@@ -15,7 +15,6 @@ const handleSearch = (e) => {
 const fetchProfiles = async () => {
     try {
         const { data } = await axiosReq.get(`/profiles/?search=${searchField}`)
-        console.log(data.results)
         setProfiles(data.results)
     } catch (error) {
         
@@ -23,12 +22,12 @@ const fetchProfiles = async () => {
 }
 
 useEffect(() => {
-    if (searchField) {
-        fetchProfiles();
-      }else{
-        setProfiles(null)
-      }
-    
+    if (searchField !== ""){
+        fetchProfiles()
+    }else {
+        setSearchField(null)
+    }
+    console.log(searchField)
 }, [searchField]);
 return (
     <div>
