@@ -6,7 +6,7 @@ import ProfilePic from './ProfilePic'
 
 function ProfileSearch() {
 const [profiles, setProfiles] = useState([])
-const [searchField, setSearchField] = useState("")
+const [searchField, setSearchField] = useState(null)
 
 const handleSearch = (e) => {
     setSearchField(e.currentTarget.value)
@@ -16,27 +16,35 @@ const fetchProfiles = async () => {
     try {
         const { data } = await axiosReq.get(`/profiles/?search=${searchField}`)
         console.log(data.results)
+        setProfiles(data.results)
     } catch (error) {
         
     }
 }
 
 useEffect(() => {
-    fetchProfiles()
+    if (searchField) {
+        fetchProfiles();
+      }else{
+        setProfiles(null)
+      }
+    
 }, [searchField]);
 return (
     <div>
-        <input onChange={(e) => handleSearch(e)} ></input>
-        <ul>
-            {profiles.length? (
-                profiles.map( profile => (
-                    <li key={profile.id}>
-                        {profile}
-                    </li>
-                ))
-            ) : ("search for a profile...")}
-        </ul>
-    </div>
+    <input onChange={handleSearch} ></input>
+    {profiles !== null && (
+      <ul>
+        {profiles.length ? (
+          profiles.map(profile => (
+            <li key={profile.id}>{profile.owner}</li>
+          ))
+        ) : (
+          "No profiles found."
+        )}
+      </ul>
+    )}
+  </div>
   )
 }
 
