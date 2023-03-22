@@ -27,7 +27,7 @@ function NavBar() {
     )
 
     useEffect(() => {
-        console.log('currentUser changed!', currentUser)
+        //console.log('currentUser changed!', currentUser)
     }, [currentUser]);
 
     return (

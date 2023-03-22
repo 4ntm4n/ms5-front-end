@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { useCurrentUser } from '../contexts/currentUserContext'
 import ProfilePic from './ProfilePic';
 import GroupMembers from './GroupMembers';
-import { axiosReq } from '../api/AxiosDefaults';
+import { axiosReq, axiosRes } from '../api/AxiosDefaults';
 
 function GroupListComponent() {
     const currentUser = useCurrentUser();
@@ -13,17 +13,17 @@ function GroupListComponent() {
 
     const fetchGroups = async () => {
         try {
-            const { data } = await axiosReq.get('/groups/')
-            console.log(data.results)
+            const { data } = await axiosRes.get('/groups/')
+            //console.log(data.results)
             setGroups(data.results)
         } catch (error) {
-            console.log(error)
+            //console.log(error)
         }
     }
     useEffect(() => {
-        fetchGroups();
+        currentUser && fetchGroups();
         //console.log(groups)
-    }, []);
+    }, [currentUser]);
 
 
     return (

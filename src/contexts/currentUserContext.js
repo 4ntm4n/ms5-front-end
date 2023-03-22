@@ -25,7 +25,7 @@ export const CurrentUserProvider = ({ children }) => {
             const { data } = await axiosRes.get('dj-rest-auth/user/')
             setCurrentUser(data);
         } catch (error) {
-            console.log(error)
+            //console.log(error)
         }
     }
     //start handle mount on mount.
@@ -36,13 +36,13 @@ export const CurrentUserProvider = ({ children }) => {
     
     const handleLogin = async (loginPayLoad) => {
         try {
-            console.log("try to fetch user")
+            //console.log("try to fetch user")
             const { data } = await axiosReq.post('/dj-rest-auth/login/', loginPayLoad)
             setCurrentUser(data);
             setTokenTimestamp(data);
             navigate(-1)
         } catch (error) {
-            console.log("fetch user error", error)
+            //console.log("fetch user error", error)
         }
     }
 
@@ -51,7 +51,7 @@ export const CurrentUserProvider = ({ children }) => {
             async (config) => {
                 if (shouldRefreshToken()) {
                     try {
-                        console.log("token is about to refresh...")
+                        //console.log("token is about to refresh...")
                         await axios.post("/dj-rest-auth/token/refresh/");
                     } catch (err) {
                         setCurrentUser((prevCurrentUser) => {

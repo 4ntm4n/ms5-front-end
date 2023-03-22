@@ -9,7 +9,7 @@ function LoginPage() {
   const { handleLogin } = useSetCurrentUser();
 
   useEffect(() => {
-    console.log()
+    //console.log()
   }, []);
 
   const handleSubmit = async (event) => {
@@ -26,7 +26,7 @@ function LoginPage() {
     try {
       handleLogin(loginPayLoad)
     } catch (error) {
-      console.log(error)
+      //console.log(error)
     }
   }
 

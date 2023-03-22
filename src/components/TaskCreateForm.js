@@ -38,13 +38,13 @@ function TaskCreateForm({ id }) {
       in_progress:false,
       completed: false,
     }
-    console.log("create form has been filled out... ", taskPayload)
+    //console.log("create form has been filled out... ", taskPayload)
     try {
-      console.log("create form is trying to submit...")
+      //console.log("create form is trying to submit...")
       await axiosRes.post('/tasks/create/', taskPayload)
       taskListUpdate()
     } catch (error) {
-      console.log(error)
+      //console.log(error)
     }
   }
 

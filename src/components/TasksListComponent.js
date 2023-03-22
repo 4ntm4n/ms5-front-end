@@ -9,9 +9,9 @@ function TasksListComponent({ tasksUpdate, id}) {
         try {
             const { data } = await axiosRes.get(`/tasks/?owning_group__id=${id}`);
             setTasks(data.results)
-            console.log("tasksList component: ", data.results)
+            //console.log("tasksList component: ", data.results)
         } catch (error) {
-            console.log(error)
+            //console.log(error)
         }
     };
 

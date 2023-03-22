@@ -3,10 +3,12 @@ import { Button, Card } from 'react-bootstrap'
 import { axiosReq } from '../api/AxiosDefaults'
 import { useCurrentUser } from '../contexts/currentUserContext';
 import { useTasksUpdate } from '../contexts/TasksContext'
+import { v4 as uuidv4 } from 'uuid';
 
 function Task({ task }) {
     const currentUser = useCurrentUser();
     const taskListUpdate = useTasksUpdate();
+    const taskid = uuidv4();
 
     const {
         id,
@@ -57,7 +59,7 @@ function Task({ task }) {
 
  
   return (
-        <Card border="warning" >
+         <Card key={taskid} border="warning" >
             
             <Card.Title>{title}</Card.Title>
             <Card.Body>

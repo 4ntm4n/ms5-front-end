@@ -27,10 +27,10 @@ function SignupPage() {
         const { data } = await axios.post(
             '/dj-rest-auth/registration/', signupPayLoad
         )
-        console.log(data)
+        //console.log(data)
         navigate('/login')
     } catch (error) {
-        console.log(error)
+        //console.log(error)
     }
 
   };

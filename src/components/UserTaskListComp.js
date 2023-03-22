@@ -11,9 +11,9 @@ function UserTaskListComp({ tasksUpdate}) {
         try {
             const { data } = await axiosRes.get(`/tasks/?owner=${currentUser.profile_id}`);
             setTasks(data.results)
-            console.log("currentUserProfileId component: ", currentUser.profile_id)
+            //console.log("currentUserProfileId component: ", currentUser.profile_id)
         } catch (error) {
-            console.log(error)
+            //console.log(error)
         }
     };
 
