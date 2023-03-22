@@ -4,7 +4,7 @@ import ProfilePic from './ProfilePic'
 
 
 
-function ProfileSearch() {
+function ProfileSearch({ groupObj , groupId }) {
 const [profiles, setProfiles] = useState([])
 const [searchField, setSearchField] = useState(null)
 
@@ -24,19 +24,22 @@ const fetchProfiles = async () => {
 useEffect(() => {
     if (searchField !== ""){
         fetchProfiles()
-    }else {
+    }
+    else {
         setSearchField(null)
     }
-    console.log(searchField)
 }, [searchField]);
 return (
     <div>
     <input onChange={handleSearch} ></input>
+    {groupObj && console.log("group passed down from group detail: ",  groupObj.members )}
     {profiles !== null && (
       <ul>
         {profiles.length ? (
           profiles.map(profile => (
-            <li key={profile.id}>{profile.owner}</li>
+            <li key={profile.id}>{profile.owner}
+                <button>add</button>
+            </li>
           ))
         ) : (
           "No profiles found."

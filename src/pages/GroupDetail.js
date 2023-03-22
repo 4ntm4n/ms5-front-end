@@ -28,8 +28,12 @@ function GroupDetail() {
   return (
     <>  
         <h1>Hello from Group Detail Page!</h1>
-        <ProfileSearch />
-        {group && <GroupMembers group={group} size={70} />}      
+        
+        {group && <>
+        <ProfileSearch groupObj={group} groupId={id} />
+        <GroupMembers group={group} size={70} /> 
+        </>
+        }      
         <TasksListComponent id={id} tasksUpdate={tasksUpdate} /> 
         <TaskCreateForm id={id}  />
 
