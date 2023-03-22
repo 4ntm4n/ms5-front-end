@@ -83,6 +83,10 @@ https://www.npmjs.com/package/uuid
 use Context tutorial:
 https://www.youtube.com/watch?v=5LrDIWkK_Bc
 
+
+javascript find method
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find
+
 BUGS:
 
 - making multiple token refresh requests. most likely because their is something wrong with how groups are being 
