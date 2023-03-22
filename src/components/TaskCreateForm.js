@@ -56,7 +56,6 @@ function TaskCreateForm({ id }) {
           <Form.Label>Task Title</Form.Label>
           <Form.Control
             placeholder="task title"
-            id="taskTitle"
             name="taskTitle"
             ref={titleRef}
           />
@@ -66,7 +65,6 @@ function TaskCreateForm({ id }) {
           <Form.Label>Task Title</Form.Label>
           <Form.Control
             placeholder="task description"
-            id="taskDescription"
             name="taskDescription"
             ref={descriptionRef}
           />
