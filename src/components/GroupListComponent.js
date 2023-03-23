@@ -7,7 +7,7 @@ import ProfilePic from './ProfilePic';
 import GroupMembers from './GroupMembers';
 import { axiosReq, axiosRes } from '../api/AxiosDefaults';
 
-function GroupListComponent({refresh}) {
+function GroupListComponent({refresh, handleRefresh}) {
     const currentUser = useCurrentUser();
     const [groups, setGroups] = useState([]);
 
@@ -25,6 +25,16 @@ function GroupListComponent({refresh}) {
         //console.log(groups)
     }, [currentUser, refresh]);
 
+
+    const handleDelete = async (id) => {
+        console.log("delete group # ", id)
+        try {
+            await axiosRes.delete(`/groups/${id}`)
+            handleRefresh()
+        } catch (error) {
+            console.log(error)
+        }   
+    }
 
     return (
         <>
@@ -46,6 +56,7 @@ function GroupListComponent({refresh}) {
                             
                         </div>
                         <Button as={Link} to={`${group.id}`}> Group Details</Button>
+                        <Button variant="danger" onClick={()=> handleDelete(group.id)}> Group Details</Button>
                     </Card>
                 ))
             ) : (<h1>loading...</h1>)}

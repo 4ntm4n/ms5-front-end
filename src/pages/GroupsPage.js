@@ -15,7 +15,7 @@ function GroupsPage() {
         <>
             <h1>Hello from GroupsPage</h1>
             <GroupCreateForm handleRefresh={handleRefresh} />
-           <GroupListComponent refresh={refresh} /> 
+           <GroupListComponent handleRefresh={handleRefresh} refresh={refresh} /> 
         </>
     )
 }
