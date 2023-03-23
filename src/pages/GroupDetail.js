@@ -12,6 +12,13 @@ function GroupDetail() {
     const tasksUpdate = useTasks()
     const { id } = useParams();
     const [group, setGroup] = useState();
+    const [membersChanged, setMembersChanged] = useState();
+
+
+    const updateMembers = () => {
+      setMembersChanged(prevMembersChanged => !prevMembersChanged)
+    }
+
 
     const fetchGroup = async () => {
       try {
@@ -21,16 +28,19 @@ function GroupDetail() {
         console.log(error)
       }
     }
+
     useEffect(() => {
       fetchGroup()
-    }, []);
+    }, [tasksUpdate, membersChanged]);
+
+
 
   return (
     <>  
         <h1>Hello from Group Detail Page!</h1>
         
         {group && <>
-        <ProfileSearch groupObj={group} groupId={id} />
+        <ProfileSearch groupObj={group} groupId={id} updateMembers={updateMembers} />
         <GroupMembers group={group} size={70} /> 
         </>
         }      

@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { axiosReq } from '../api/AxiosDefaults'
 import ProfilePic from './ProfilePic'
-import { useTasksUpdate } from '../contexts/TasksContext'
 
 
-function ProfileSearch({ groupObj , groupId }) {
+function ProfileSearch({ groupObj , groupId, updateMembers }) {
 const [profiles, setProfiles] = useState([])
 const [searchField, setSearchField] = useState(null)
-const updateTasksList = useTasksUpdate()
+
 const handleSearch = (e) => {
     setSearchField(e.currentTarget.value)
 }
@@ -25,6 +24,7 @@ const handleAddRemove = async (id) => {
     try {
         await axiosReq.put(`/groups/${groupId}/members/`, {profile_id: id})
         setSearchField("")
+        updateMembers();
         console.log(groupId)
     } catch (error) {
         console.log(error)
@@ -39,7 +39,6 @@ useEffect(() => {
         setSearchField(null)
     }
 }, [searchField]);
-
 
 
 
