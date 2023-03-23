@@ -21,9 +21,14 @@ const fetchProfiles = async () => {
     }
 }
 
-const handleAddRemove = (id) => {
-    console.log(id)
-    setSearchField("")
+const handleAddRemove = async (id) => {
+    try {
+        await axiosReq.put(`/groups/${groupId}/members/`, {profile_id: id})
+        setSearchField("")
+        console.log(groupId)
+    } catch (error) {
+        console.log(error)
+    }
 }
 
 useEffect(() => {
@@ -34,6 +39,8 @@ useEffect(() => {
         setSearchField(null)
     }
 }, [searchField]);
+
+
 
 
 return (
