@@ -13,6 +13,7 @@ import SignupPage from './pages/auth_pages/SignupPage';
 import NotFound from './pages/error-pages/NotFound';
 import GroupDetail from './pages/GroupDetail';
 import { TasksProvider } from './contexts/TasksContext';
+import ProfilePage from './pages/ProfilePage';
 
 
 
@@ -38,6 +39,7 @@ function App() {
             <Route path='/groups/:id' element={<GroupDetail />} />
             <Route path='/feed' element={<FeedPage />} />            
             <Route path='/tasks' element={<TasksPage />} />
+            <Route path='/profile' element={<ProfilePage />} />
           </Route>
         </Routes>
       </div>
