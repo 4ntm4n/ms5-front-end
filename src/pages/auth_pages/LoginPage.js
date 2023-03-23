@@ -1,5 +1,6 @@
-import React, {useRef, useEffect } from 'react'
-import { Form, Button } from 'react-bootstrap'
+import React, { useRef, useEffect, useState } from 'react'
+import { Form, Button, Alert } from 'react-bootstrap'
+import { axiosRes } from '../../api/AxiosDefaults'
 import { useSetCurrentUser } from '../../contexts/currentUserContext'
 
 
@@ -7,6 +8,7 @@ function LoginPage() {
   const usernameRef = useRef(null)
   const passwordRef = useRef(null)
   const { handleLogin } = useSetCurrentUser();
+  const [errors, setErrors] = useState({})
 
   useEffect(() => {
     //console.log()
@@ -14,35 +16,52 @@ function LoginPage() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    /* const username = usernameRef.current.value;
-    const password = passwordRef.current.value; */
+    const username = usernameRef.current.value;
+    const password = passwordRef.current.value;
+    //console.log({ username, password1, password2 });
 
-    const loginPayLoad = { 
-
-      username: usernameRef.current.value, 
-      password: passwordRef.current.value 
+    const loginPayLoad = {
+      username,
+      password,
     }
-
     try {
-      handleLogin(loginPayLoad)
+      //console.log("try to fetch user")
+      const { data } = await axiosRes.post('/dj-rest-auth/login/', loginPayLoad)
+      handleLogin(data)
     } catch (error) {
-      //console.log(error)
+      console.log('Error response:', error.response);
+      setErrors(error.response?.data)
     }
   }
 
   return (
+
     <Form onSubmit={handleSubmit}>
+      
+    ))}
       <Form.Group className="mb-3" controlId="username">
         <Form.Label>Username</Form.Label>
         <Form.Control type="text" placeholder="username" ref={usernameRef} />
       </Form.Group>
 
-      <Form.Group className="mb-3" controlId="username">
+      <Form.Group className="mb-3" controlId="password">
         <Form.Label>Password</Form.Label>
-        <Form.Control type="text" placeholder="password" ref={passwordRef} />
+        <Form.Control type="password" placeholder="password" ref={passwordRef} />
       </Form.Group>
+      {errors.password?.map((message, index) => (
+        <Alert variant="warning" key={index}>
+          {message}
+        </Alert>
+      ))}
+
+      {errors.non_field_errors?.map((message, index) => (
+        <Alert variant="warning" key={index}>
+          {message}
+        </Alert>
+      ))}
       <Button variant="dark" type="submit"> Log in </Button>
     </Form>
+
   )
 }
 

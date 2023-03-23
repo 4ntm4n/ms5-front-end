@@ -34,16 +34,11 @@ export const CurrentUserProvider = ({ children }) => {
     }, []);
 
     
-    const handleLogin = async (loginPayLoad) => {
-        try {
-            //console.log("try to fetch user")
-            const { data } = await axiosReq.post('/dj-rest-auth/login/', loginPayLoad)
+    const handleLogin = async (data) => {
             setCurrentUser(data);
             setTokenTimestamp(data);
-            navigate(-1)
-        } catch (error) {
-            //console.log("fetch user error", error)
-        }
+            navigate("/feed")
+    
     }
 
     useMemo(() => {

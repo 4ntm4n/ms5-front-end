@@ -1,12 +1,14 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Form, Button } from 'react-bootstrap'
+import { Form, Button, Alert } from 'react-bootstrap'
 import axios from 'axios';
+
 
 function SignupPage() {
   const usernameRef = useRef(null);
   const password1Ref = useRef(null);
   const password2Ref = useRef(null);
+  const [errors, setErrors] = useState({})
 
   const navigate = useNavigate()
 
@@ -24,13 +26,13 @@ function SignupPage() {
     }
 
     try {
-        const { data } = await axios.post(
-            '/dj-rest-auth/registration/', signupPayLoad
+        await axios.post(
+          '/dj-rest-auth/registration/', signupPayLoad
         )
         //console.log(data)
         navigate('/login')
     } catch (error) {
-        //console.log(error)
+        setErrors(error.response?.data)
     }
 
   };
@@ -41,16 +43,31 @@ function SignupPage() {
         <Form.Label>Username</Form.Label>
         <Form.Control type="text" placeholder="Enter username" ref={usernameRef} />
       </Form.Group>
+      {errors.username?.map((message, index) => (
+        <Alert variant="warning" key={index}>
+          {message}
+        </Alert>
+      ))}
 
       <Form.Group className="mb-3" controlId="password1">
         <Form.Label>Password</Form.Label>
         <Form.Control type="password" placeholder="Password" ref={password1Ref} />
       </Form.Group>
+      {errors.password1?.map((message, index) => (
+        <Alert variant="warning" key={index}>
+          {message}
+        </Alert>
+      ))}
 
       <Form.Group className="mb-3" controlId="password2">
         <Form.Label>Confirm password</Form.Label>
         <Form.Control type="password" placeholder="Password" ref={password2Ref} />
       </Form.Group>
+      {errors.password2?.map((message, index) => (
+        <Alert variant="warning" key={index}>
+          {message}
+        </Alert>
+      ))}
 
       <Button variant="primary" type="submit">
         Sign up
