@@ -37,8 +37,7 @@ function LoginPage() {
   return (
 
     <Form onSubmit={handleSubmit}>
-      
-    ))}
+
       <Form.Group className="mb-3" controlId="username">
         <Form.Label>Username</Form.Label>
         <Form.Control type="text" placeholder="username" ref={usernameRef} />
@@ -48,16 +47,12 @@ function LoginPage() {
         <Form.Label>Password</Form.Label>
         <Form.Control type="password" placeholder="password" ref={passwordRef} />
       </Form.Group>
-      {errors.password?.map((message, index) => (
-        <Alert variant="warning" key={index}>
-          {message}
-        </Alert>
+      {errors.title?.map((message, index) => (
+        <Alert key={index} variant='danger'> {message}</Alert>
       ))}
 
       {errors.non_field_errors?.map((message, index) => (
-        <Alert variant="warning" key={index}>
-          {message}
-        </Alert>
+        <Alert key={index} variant='danger'> {message}</Alert>
       ))}
       <Button variant="dark" type="submit"> Log in </Button>
     </Form>
