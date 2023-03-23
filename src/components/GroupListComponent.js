@@ -7,7 +7,7 @@ import ProfilePic from './ProfilePic';
 import GroupMembers from './GroupMembers';
 import { axiosReq, axiosRes } from '../api/AxiosDefaults';
 
-function GroupListComponent() {
+function GroupListComponent({refresh}) {
     const currentUser = useCurrentUser();
     const [groups, setGroups] = useState([]);
 
@@ -23,7 +23,7 @@ function GroupListComponent() {
     useEffect(() => {
         currentUser && fetchGroups();
         //console.log(groups)
-    }, [currentUser]);
+    }, [currentUser, refresh]);
 
 
     return (

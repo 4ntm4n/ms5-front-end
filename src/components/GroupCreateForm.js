@@ -6,7 +6,7 @@ import { axiosRes } from '../api/AxiosDefaults';
 import { useTasksUpdate } from '../contexts/TasksContext';
 
 
-function GroupCreateForm() {
+function GroupCreateForm({handleRefresh}) {
   const nameRef = useRef(null);
   const descriptionRef = useRef(null);
   const [errors, setErrors] = useState({})
@@ -17,7 +17,8 @@ function GroupCreateForm() {
   } */
 
   //handle data put into the "create task form" and package it as a tasks.
-    const handleCreate = async (event) => {
+   
+  const handleCreate = async (event) => {
     event.preventDefault();
     const taskPayload = {
       name: nameRef.current.value,
@@ -27,6 +28,7 @@ function GroupCreateForm() {
     try {
       //console.log("create form is trying to submit...")
       await axiosRes.post('/groups/', taskPayload)
+      handleRefresh()
     } catch (error) {
       console.log(error.response)
       setErrors(error.response?.data)
@@ -60,7 +62,7 @@ function GroupCreateForm() {
         {errors.non_field_errors?.map((message, index) => {
           return <Alert key={index} variant='danger'> {message}</Alert>
         })}
-        <Button type="submit">Create new task</Button>
+        <Button type="submit">Create new Group</Button>
       </Form>
 
     </>
