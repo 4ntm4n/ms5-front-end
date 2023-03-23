@@ -1,15 +1,16 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { Button, Card } from 'react-bootstrap'
+import { Alert, Button, Card } from 'react-bootstrap'
 import { Link } from 'react-router-dom';
 import { useCurrentUser } from '../contexts/currentUserContext'
 import ProfilePic from './ProfilePic';
 import GroupMembers from './GroupMembers';
 import { axiosReq, axiosRes } from '../api/AxiosDefaults';
 
-function GroupListComponent({refresh, handleRefresh}) {
+function GroupListComponent({refresh, handleRefresh, setErrors}) {
     const currentUser = useCurrentUser();
     const [groups, setGroups] = useState([]);
+
 
     const fetchGroups = async () => {
         try {
@@ -17,9 +18,11 @@ function GroupListComponent({refresh, handleRefresh}) {
             //console.log(data.results)
             setGroups(data.results)
         } catch (error) {
-            //console.log(error)
+            console.log(error)
+            setErrors(error.response?.data)
         }
     }
+
     useEffect(() => {
         currentUser && fetchGroups();
         //console.log(groups)
@@ -33,13 +36,15 @@ function GroupListComponent({refresh, handleRefresh}) {
             handleRefresh()
         } catch (error) {
             console.log(error)
+            setErrors(error.response?.data)
         }   
     }
 
     return (
-        <>
+        <> 
             {groups.length ? (
                 groups.map(group => (
+                    
                     <Card key={group.id} border="dark" style={{ width: '30rem', minHeight: '5rem' }} >
                         <Card.Header >{group.id}</Card.Header>
                         <Card.Body>
@@ -56,7 +61,7 @@ function GroupListComponent({refresh, handleRefresh}) {
                             
                         </div>
                         <Button as={Link} to={`${group.id}`}> Group Details</Button>
-                        <Button variant="danger" onClick={()=> handleDelete(group.id)}> Group Details</Button>
+                        <Button variant="danger" onClick={()=> handleDelete(group.id)}> Delete</Button>
                     </Card>
                 ))
             ) : (<h1>loading...</h1>)}
