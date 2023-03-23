@@ -84,8 +84,19 @@ use Context tutorial:
 https://www.youtube.com/watch?v=5LrDIWkK_Bc
 
 
+
+profile search component:
 javascript find method
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find
+
+slice last character:
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/slice
+
+check for backspace in input field
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String#escape_sequences
+
+
+
 
 BUGS:
 

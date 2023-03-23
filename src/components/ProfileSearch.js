@@ -24,7 +24,7 @@ const handleAddRemove = async (id) => {
     try {
         await axiosReq.put(`/groups/${groupId}/members/`, {profile_id: id})
         setSearchField("")
-        updateMembers();
+        updateMembers()
         console.log(groupId)
     } catch (error) {
         console.log(error)
@@ -32,13 +32,19 @@ const handleAddRemove = async (id) => {
 }
 
 useEffect(() => {
-    if (searchField !== ""){
-        fetchProfiles()
+    if (searchField === null) return;
+  
+    if (searchField.length === 0 || searchField.slice(-1) === '\b') {
+      setProfiles([]);
+      return;
     }
-    else {
-        setSearchField(null)
-    }
-}, [searchField]);
+  
+    const timeoutId = setTimeout(() => {
+      fetchProfiles();
+    }, 200);
+  
+    return () => clearTimeout(timeoutId);
+  }, [searchField]);
 
 
 
