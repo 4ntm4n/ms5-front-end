@@ -4,7 +4,7 @@ import ProfilePicForm from '../components/ProfilePicForm'
 function ProfilePage() {
   return (
     <div>Hello from ProfilePage
-    <ProfilePicForm />
+    <ProfilePicForm></ProfilePicForm>
     </div>
     
   )
