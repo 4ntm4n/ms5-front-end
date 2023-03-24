@@ -4,6 +4,7 @@ import { axiosReq } from '../api/AxiosDefaults'
 import { useCurrentUser } from '../contexts/currentUserContext';
 import { useTasksUpdate } from '../contexts/TasksContext'
 import { v4 as uuidv4 } from 'uuid';
+import TaskUpdateForm from './TaskUpdateForm';
 
 function Task({ task }) {
     const currentUser = useCurrentUser();
@@ -91,6 +92,7 @@ const handlComplete = async (e) => {
             <span>mark as complete</span>
             <span></span>
             <Button variant="danger" onClick={handleDelete}>delete forever</Button>
+            <TaskUpdateForm task={task}/>
         </Card>
   )
 }

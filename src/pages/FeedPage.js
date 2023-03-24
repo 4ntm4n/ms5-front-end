@@ -6,7 +6,7 @@ function FeedPage() {
 
     const fetchTasks = async () => {
         try {
-            const { data } = await axiosRes.get('/tasks/events');
+            const { data } = await axiosRes.get('/tasks/events/');
             setTasks(data.results)
             console.log(data)
         } catch (error) {
