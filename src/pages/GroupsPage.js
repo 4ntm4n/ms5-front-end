@@ -1,4 +1,4 @@
-import { Alert } from 'react-bootstrap'
+import { Alert, Container, Row, } from 'react-bootstrap'
 import React, { useState, useEffect } from 'react'
 import GroupCreateForm from '../components/GroupCreateForm'
 import GroupListComponent from '../components/GroupListComponent'
@@ -25,9 +25,15 @@ function GroupsPage() {
                     ? ("You can not delete a group you are not the owner of")
                     : (errors.detail)
                  }</Alert>
-            )}
-            <GroupCreateForm handleRefresh={handleRefresh} />
-            <GroupListComponent setErrors={handleSetErrors} handleRefresh={handleRefresh} refresh={refresh} />
+            )} 
+            
+            <Container>
+                <Row>
+                <GroupCreateForm handleRefresh={handleRefresh} />
+                <GroupListComponent setErrors={handleSetErrors} handleRefresh={handleRefresh} refresh={refresh} />
+
+                </Row>
+            </Container>
         </>
     )
 }

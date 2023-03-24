@@ -1,13 +1,15 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { Alert, Button, Card } from 'react-bootstrap'
+import { Alert, Button, Card, Container, Row, Col } from 'react-bootstrap'
 import { Link } from 'react-router-dom';
 import { useCurrentUser } from '../contexts/currentUserContext'
 import ProfilePic from './ProfilePic';
 import GroupMembers from './GroupMembers';
 import { axiosReq, axiosRes } from '../api/AxiosDefaults';
+import styles from '../styles/GroupCard.module.css'
 
-function GroupListComponent({refresh, handleRefresh, setErrors}) {
+
+function GroupListComponent({ refresh, handleRefresh, setErrors }) {
     const currentUser = useCurrentUser();
     const [groups, setGroups] = useState([]);
 
@@ -37,35 +39,54 @@ function GroupListComponent({refresh, handleRefresh, setErrors}) {
         } catch (error) {
             console.log(error)
             setErrors(error.response?.data)
-        }   
+        }
     }
 
     return (
-        <> 
+            <Row>
             {groups.length ? (
                 groups.map(group => (
-                    
-                    <Card key={group.id} border="dark" style={{ width: '30rem', minHeight: '5rem' }} >
-                        <Card.Header >{group.id}</Card.Header>
-                        <Card.Body>
-                            <Card.Title>{group.name}</Card.Title>
-                            <Card.Text>
-                                {group.description}
-                            </Card.Text>
-                        </Card.Body>
-                        <GroupMembers group={group} /> 
-                        <div>
-                            <p>group owner</p>
-                            {/* map through the members and extract the group owner */}
-                            <ProfilePic key={group.id + group.group_owner.id} member={group.group_owner} size={70} />
-                            
-                        </div>
-                        <Button as={Link} to={`${group.id}`}> Group Details</Button>
-                        <Button variant="danger" onClick={()=> handleDelete(group.id)}> Delete</Button>
-                    </Card>
+
+                
+                    <Col className="gy-4">
+                         <Link to={`${group.id}`} className={styles.link}>
+                        <Card key={group.id}  border="dark" style={{ width: '30rem', minHeight: '5rem' }} >
+
+                            <Card.Header >{group.id}</Card.Header>
+                            <Card.Body>
+                                <Card.Title className='mb-5'>{group.name}</Card.Title>
+                                <Card.Text>
+                                    {group.description}
+                                </Card.Text>
+                            </Card.Body>
+
+
+                            <Container fluid className="px-0">
+                                <Row className="d-flex align-items-center justify-content-between px-0">
+                                    <Col className="px-0"> 
+                                        <div>
+                                            {/* map through the members and extract the group owner */}
+                                            <ProfilePic
+                                                key={group.id + group.group_owner.id}
+                                                member={group.group_owner}
+                                                size={70} />
+                                        </div>
+                                    </Col>
+                                    <Col className="px-0">
+                                        <GroupMembers group={group} size={40} />
+                                    </Col>
+                                </Row>
+                            </Container>
+
+                            <Button variant="danger" onClick={() => handleDelete(group.id)}> Delete</Button>
+                        </Card>
+                    </Link>
+                    </Col>
+                   
+
                 ))
             ) : (<h1>loading...</h1>)}
-        </>
+            </Row>
     )
 }
 
