@@ -5,23 +5,24 @@ import { axiosReq } from '../api/AxiosDefaults';
 
 
 function TaskUpdateForm({task}) {
-    const [taskPayload, setFormData] = useState({
+    const [taskPayload, setTaskPayload] = useState({
         title: task.title,
         description: task.description,
     });
 
-    const handleChange = (e) => {
-        const {name, value} = e.target;
-        setFormData(prevState => ({
-            ...prevState,
-            [name]: value,
-        }))
-    }
+    const handleChange = (event) => {
+        const { name, value } = event.target;
+        setTaskPayload((prevState) => ({
+          ...prevState,
+          [name]: value,
+        }));
+      };
+    
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axiosReq(`/tasks/${task.id}/`, taskPayload)
+            await axiosReq.patch(`/tasks/${task.id}/`, taskPayload)
         } catch (error) {
             console.log("error in task update. ", error)
         }
@@ -34,8 +35,8 @@ function TaskUpdateForm({task}) {
             <Form.Control
               type="text"
               name="title"
-             
-              
+              value={taskPayload.title}
+              onChange={handleChange}
             />
           </Form.Group>
     
@@ -44,8 +45,8 @@ function TaskUpdateForm({task}) {
             <Form.Control
               as="textarea"
               name="description"
-              
-            
+              value={taskPayload.description}
+              onChange={handleChange}
               rows={3}
             />
           </Form.Group>
