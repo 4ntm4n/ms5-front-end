@@ -48,13 +48,17 @@ function Task({ task }) {
         await axiosReq.put(`/tasks/${id}/`, payload)
         taskListUpdate()
     } catch (error) {
+      console.log(error)
     }
 }   
 
-const handlComplete = async (e) => {
+
+//refactor this later to put logic inside handleUpdate and remove this code.
+const handleComplete = async (e) => {
   if (payload.in_progress && e.target.name==="complete") {
       payload.completed = true
   }
+
   try {
       await axiosReq.put(`/tasks/${id}/`, payload)
       taskListUpdate()
@@ -62,7 +66,11 @@ const handlComplete = async (e) => {
   }
 } 
 
- 
+const handleTaskUpdated = () =>  {
+  taskListUpdate();
+}
+
+
   return (
          <Card key={taskid} border="warning" >
             
@@ -77,7 +85,7 @@ const handlComplete = async (e) => {
                 <Button 
                   name="complete" 
                   variant="warning" 
-                  onClick={(e) => handleUpdate(e)}>
+                  onClick={(e) => handleComplete(e)}>
                   complete task
                 </Button>
               </>
@@ -92,7 +100,7 @@ const handlComplete = async (e) => {
             <span>mark as complete</span>
             <span></span>
             <Button variant="danger" onClick={handleDelete}>delete forever</Button>
-            <TaskUpdateForm task={task}/>
+            <TaskUpdateForm task={task} onTaskUpdated={handleTaskUpdated}/>
         </Card>
   )
 }

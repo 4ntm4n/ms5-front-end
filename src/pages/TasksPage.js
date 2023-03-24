@@ -14,7 +14,7 @@ function TaskPage() {
         <>
             <h1>Hello from tasksPage!</h1>
 
-            <UserTaskListComp tasksUpdate={tasksUpdate} />
+            <UserTaskListComp tasksUpdate={tasksUpdate}  />
 
         </>
     )

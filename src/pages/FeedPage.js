@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { axiosRes } from '../api/AxiosDefaults';
 import Task from '../components/Task';
+import { useTasks } from '../contexts/TasksContext';
+
+
 function FeedPage() {
     const [tasks, setTasks] = useState([]);
+    const tasksUpdate = useTasks()
 
     const fetchTasks = async () => {
         try {
@@ -16,8 +20,7 @@ function FeedPage() {
 
     useEffect(() => {
         fetchTasks();
-        
-    },[])
+    },[tasksUpdate])
 
     return (
         <>

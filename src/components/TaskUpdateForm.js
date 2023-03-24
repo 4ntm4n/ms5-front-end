@@ -4,7 +4,7 @@ import { axiosReq } from '../api/AxiosDefaults';
 
 
 
-function TaskUpdateForm({task}) {
+function TaskUpdateForm({task, onTaskUpdated}) {
     const [taskPayload, setTaskPayload] = useState({
         title: task.title,
         description: task.description,
@@ -18,18 +18,18 @@ function TaskUpdateForm({task}) {
         }));
       };
     
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
             await axiosReq.patch(`/tasks/${task.id}/`, taskPayload)
+            onTaskUpdated()
         } catch (error) {
             console.log("error in task update. ", error)
         }
     }
 
     return (
-        <Form >
+        <Form onSubmit={handleSubmit}>
           <Form.Group className="mb-3" controlId="taskTitle">
             <Form.Label>Title</Form.Label>
             <Form.Control
