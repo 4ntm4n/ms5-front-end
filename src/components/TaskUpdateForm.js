@@ -1,14 +1,31 @@
 import React, { useState } from 'react'
 import { Form, Button } from 'react-bootstrap';
+import { axiosReq } from '../api/AxiosDefaults';
 
 
 
 function TaskUpdateForm({task}) {
-    const [formData, setFormData] = useState({
+    const [taskPayload, setFormData] = useState({
         title: task.title,
         description: task.description,
     });
 
+    const handleChange = (e) => {
+        const {name, value} = e.target;
+        setFormData(prevState => ({
+            ...prevState,
+            [name]: value,
+        }))
+    }
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            await axiosReq(`/tasks/${task.id}/`, taskPayload)
+        } catch (error) {
+            console.log("error in task update. ", error)
+        }
+    }
 
     return (
         <Form >
