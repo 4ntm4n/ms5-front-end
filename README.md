@@ -96,7 +96,10 @@ check for backspace in input field
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String#escape_sequences
 
 
-
+axios interceptors:
+https://axios-http.com/docs/interceptors
+https://reactjs.org/docs/context.html
+https://jwt.io/introduction/
 
 BUGS:
 
