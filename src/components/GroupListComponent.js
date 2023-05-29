@@ -48,9 +48,9 @@ function GroupListComponent({ refresh, handleRefresh, setErrors }) {
                 groups.map(group => (
 
                 
-                    <Col className="gy-4">
+                    <Col  key={group.id} className="gy-4">
                          <Link to={`${group.id}`} className={styles.link}>
-                        <Card key={group.id}  border="dark" style={{ width: '30rem', minHeight: '5rem' }} >
+                        <Card  border="dark" style={{ width: '30rem', minHeight: '5rem' }} >
 
                             <Card.Header >{group.id}</Card.Header>
                             <Card.Body>

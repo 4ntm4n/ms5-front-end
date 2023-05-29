@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { axiosReq } from '../api/AxiosDefaults'
+import { axiosReq, axiosRes } from '../api/AxiosDefaults'
 import ProfilePic from './ProfilePic'
 
 
@@ -13,7 +13,7 @@ const handleSearch = (e) => {
 
 const fetchProfiles = async () => {
     try {
-        const { data } = await axiosReq.get(`/profiles/?search=${searchField}`)
+        const { data } = await axiosRes.get(`/profiles/?search=${searchField}`)
         setProfiles(data.results)
     } catch (error) {
         

@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import { Button } from 'react-bootstrap';
 import { Link, useLocation, useParams } from 'react-router-dom'
-import { axiosReq } from '../api/AxiosDefaults';
+import { axiosRes } from '../api/AxiosDefaults';
 import GroupMembers from '../components/GroupMembers';
 import ProfileSearch from '../components/ProfileSearch';
 import TaskCreateForm from '../components/TaskCreateForm';
 import TasksListComponent from '../components/TasksListComponent';
+import { useCurrentUser } from '../contexts/currentUserContext';
 import { useTasks } from '../contexts/TasksContext';
 
 function GroupDetail() {
+    const currentUser = useCurrentUser()
     const tasksUpdate = useTasks()
     const { id } = useParams();
     const [group, setGroup] = useState();
@@ -22,7 +24,7 @@ function GroupDetail() {
 
     const fetchGroup = async () => {
       try {
-        const {data} = await axiosReq.get(`/groups/${id}/`)
+        const {data} = await axiosRes.get(`/groups/${id}/`)
         setGroup(data)
       } catch (error) {
         console.log(error)
@@ -30,7 +32,7 @@ function GroupDetail() {
     }
 
     useEffect(() => {
-      fetchGroup()
+      currentUser && fetchGroup()
     }, [tasksUpdate, membersChanged]);
 
 

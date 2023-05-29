@@ -1,18 +1,21 @@
 import React, { useRef, useEffect, useState } from 'react'
 import { Form, Button, Alert } from 'react-bootstrap'
-import { axiosRes } from '../../api/AxiosDefaults'
+import { useNavigate } from 'react-router-dom'
+import { axiosReq } from '../../api/AxiosDefaults'
 import { useSetCurrentUser } from '../../contexts/currentUserContext'
-
+import { useRedirect } from '../../hooks/useRedirect'
+import { setTokenTimestamp } from "../../utils/utils";
 
 function LoginPage() {
+  useRedirect("loggedIn");
   const usernameRef = useRef(null)
   const passwordRef = useRef(null)
-  const { handleLogin } = useSetCurrentUser();
+
+  const setCurrentUser = useSetCurrentUser();
+
   const [errors, setErrors] = useState({})
 
-  useEffect(() => {
-    //console.log()
-  }, []);
+  const navigate = useNavigate()
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -26,10 +29,11 @@ function LoginPage() {
     }
     try {
       //console.log("try to fetch user")
-      const { data } = await axiosRes.post('/dj-rest-auth/login/', loginPayLoad)
-      handleLogin(data)
+      const { data } = await axiosReq.post('/dj-rest-auth/login/', loginPayLoad)
+      setCurrentUser(data.user);
+      setTokenTimestamp(data);
+      navigate(-1)
     } catch (error) {
-      console.log('Error response:', error.response);
       setErrors(error.response?.data)
     }
   }

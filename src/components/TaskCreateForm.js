@@ -2,7 +2,7 @@ import axios from 'axios';
 import { Alert } from 'react-bootstrap';
 import React, { useRef, useState } from 'react'
 import { Form, Button } from 'react-bootstrap';
-import { axiosRes } from '../api/AxiosDefaults';
+import { axiosReq } from '../api/AxiosDefaults';
 import { useTasksUpdate } from '../contexts/TasksContext';
 
 
@@ -43,7 +43,7 @@ function TaskCreateForm({ id }) {
     //console.log("create form has been filled out... ", taskPayload)
     try {
       //console.log("create form is trying to submit...")
-      await axiosRes.post('/tasks/create/', taskPayload)
+      await axiosReq.post('/tasks/create/', taskPayload)
       taskListUpdate()
     } catch (error) {
       console.log(error.response)

@@ -4,7 +4,7 @@ import { axiosReq } from '../api/AxiosDefaults';
 
 
 
-function TaskUpdateForm({task, onTaskUpdated}) {
+function TaskUpdateForm({task, onTaskUpdated, toggleUpdateForm}) {
     const [taskPayload, setTaskPayload] = useState({
         title: task.title,
         description: task.description,
@@ -23,6 +23,7 @@ function TaskUpdateForm({task, onTaskUpdated}) {
         try {
             await axiosReq.patch(`/tasks/${task.id}/`, taskPayload)
             onTaskUpdated()
+            toggleUpdateForm()
         } catch (error) {
             console.log("error in task update. ", error)
         }

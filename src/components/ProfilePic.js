@@ -3,9 +3,9 @@ import { OverlayTrigger, Tooltip } from 'react-bootstrap'
 import { v4 as uuidv4 } from 'uuid';
 
 
-function ProfilePic({ member, size }) {
+function ProfilePic({ member, size=50 }) {
     const picId = uuidv4();
-    const { image, owner } = member
+    
     const picStyle = {
         width: `${size}px`,
         height: `${size}px`,
@@ -26,7 +26,7 @@ function ProfilePic({ member, size }) {
             
         </OverlayTrigger> */}
     return (
-        <img src={image} alt="profile-pic" style={picStyle} />
+        <img src={member.image} alt="profile-pic" style={picStyle} />
     )
 }
 
